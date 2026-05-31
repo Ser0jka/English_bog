@@ -12,7 +12,7 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(340px, 40%);
   gap: 0 24px;
-  min-height: min(600px, calc(100vh - 56px));
+  min-height: min(780px, calc(100vh - 56px));
   overflow: hidden;
   border-radius: 32px;
   background:
@@ -40,6 +40,7 @@
   display: flex;
   flex-direction: column;
   padding-bottom: 56px;
+  padding-right: 40px;
 }
 
 // ── Бейджи ────────────────────────────────────────────────
@@ -85,10 +86,10 @@
 
 // ── Заголовок ─────────────────────────────────────────────
 .title {
-  font-size: clamp(60px, 5.8vw, 110px);
+  font-size: clamp(60px, 5.2vw, 92px);
   font-weight: 950;
   letter-spacing: -0.01em;
-  line-height: 0.9;
+  line-height: 0.92;
   text-transform: uppercase;
 
   span,
@@ -170,11 +171,11 @@
 
 // ── Подзаголовок ─────────────────────────────────────────
 .subtitle {
-  max-width: 520px;
+  max-width: 560px;
   margin-top: 28px;
-  font-size: 20px;
+  font-size: clamp(18px, 1.4vw, 22px);
   font-weight: 600;
-  line-height: 1.3;
+  line-height: 1.35;
   color: rgba(255, 255, 255, 0.88);
 }
 
@@ -207,12 +208,12 @@
     transform $transition,
     box-shadow $transition;
 
-  &:hover { transform: translateY(-3px); }
   &:focus-visible { @include focus-ring; }
 }
 
 .primaryBtn {
   @include btnBase;
+  overflow: hidden;
   background: #ffffff;
   color: #0a0808;
 
@@ -225,6 +226,7 @@
 
 .secondaryBtn {
   @include btnBase;
+  overflow: hidden;
   border: 2.5px solid rgba(255, 255, 255, 0.9);
   color: #ffffff;
 
@@ -283,7 +285,7 @@
 .teacherInfo {
   position: relative;
   z-index: 2;
-  padding-bottom: 36px;
+  padding-bottom: 68px; // запас под ticker (38px) + воздух
   text-align: center;
 }
 
@@ -320,12 +322,51 @@
   &:hover {
     background: #0d1519;
     color: #ffffff;
-    transform: translateY(-4px) scale(1.06);
   }
 
   &:focus-visible {
     @include focus-ring;
   }
+}
+
+// ── Ticker (бегущая строка) ───────────────────────────────
+.ticker {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
+  padding-block: 11px;
+}
+
+.tickerTrack {
+  display: flex;
+  width: max-content;
+  animation: tickerScroll 28s linear infinite;
+}
+
+.tickerItem {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+  white-space: nowrap;
+  padding-inline: 18px;
+}
+
+.tickerDot {
+  color: rgba(255, 255, 255, 0.3);
+  margin-left: 18px;
+}
+
+@keyframes tickerScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
 // ── 1440 → 1200px ────────────────────────────────────────
@@ -357,7 +398,7 @@
   }
 
   .copy {
-    padding-bottom: 0;
+    padding-bottom: 32px;
   }
 
   .personCol {
@@ -374,6 +415,19 @@
 @media (max-width: $breakpoint-md) {
   .hero {
     padding-bottom: 56px;
+  }
+
+  .teacherInfo {
+    padding-bottom: 60px;
+  }
+
+  .ticker {
+    padding-block: 9px;
+  }
+
+  .tickerItem {
+    font-size: 10px;
+    padding-inline: 14px;
   }
 
   .card {

@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { links } from "@/data/links";
 import { siteContent } from "@/data/content";
 import { Container } from "@/shared/Container/Container";
@@ -43,7 +44,13 @@ export function Footer() {
     <footer className={styles.footer}>
       <Container>
         <div className={styles.inner}>
-          <button className={styles.upButton} onClick={scrollToTop} aria-label="Наверх">
+          <motion.button
+            className={styles.upButton}
+            onClick={scrollToTop}
+            aria-label="Наверх"
+            whileHover={{ y: -5 }}
+            whileTap={{ scale: 0.94 }}
+          >
             <span className={styles.upCircle} aria-hidden="true">
               <svg
                 width="20"
@@ -59,7 +66,7 @@ export function Footer() {
               </svg>
             </span>
             <span className={styles.upLabel}>Up</span>
-          </button>
+          </motion.button>
 
           <div className={styles.grid}>
             {/* Колонка 1: Логотип + соцсети */}

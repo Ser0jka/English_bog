@@ -1,9 +1,15 @@
+"use client";
+
+import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
 import { links } from "@/data/links";
 import { siteContent } from "@/data/content";
 import { Container } from "@/shared/Container/Container";
 import { Section } from "@/shared/Section/Section";
 import { VideoSlot } from "@/shared/VideoSlot/VideoSlot";
 import styles from "./Hero.module.scss";
+
+const HeroScene = dynamic(() => import("./HeroScene"), { ssr: false });
 
 const socials = [
   {
@@ -35,62 +41,124 @@ const socials = [
   },
 ];
 
+const TICKER_ITEMS = [
+  "АМЕРИКАНСКОЕ ПРОИЗНОШЕНИЕ",
+  "УВЕРЕННАЯ РЕЧЬ",
+  "7 УРОКОВ",
+  "С НУЛЯ ДО НОСИТЕЛЯ",
+  "ПОСТАВЬ АКЦЕНТ",
+  "НАЧНИ ПОНИМАТЬ НОСИТЕЛЕЙ",
+  "DAVE ENGLISHBAD",
+];
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 28 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.52, ease: "easeOut" as const } },
+};
+
+const stagger = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.09, delayChildren: 0.05 } },
+};
+
+const titleStagger = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.14 } },
+};
+
+const titleLine = {
+  hidden: { opacity: 0, y: 32 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.58, ease: "easeOut" as const } },
+};
+
 export function Hero() {
   const { hero } = siteContent;
 
   return (
     <Section className={styles.hero} ariaLabel="Главный экран" id="top">
       <Container>
-        <div className={styles.card}>
-          {/* Левая колонка: текст + кнопки */}
-          <div className={styles.copy}>
-            <ul className={styles.badges} aria-label="Детали курса">
-              {hero.badges.map((badge) => (
-                <li key={badge}>{badge}</li>
+        <motion.div
+          className={styles.card}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+          variants={stagger}
+        >
+          {/* Marquee ticker */}
+          <div className={styles.ticker} aria-hidden="true">
+            <div className={styles.tickerTrack}>
+              {[...TICKER_ITEMS, ...TICKER_ITEMS].map((item, i) => (
+                <span key={i} className={styles.tickerItem}>
+                  {item}<span className={styles.tickerDot}>·</span>
+                </span>
               ))}
-            </ul>
-
-            <h1 className={styles.title}>
-              <span className={styles.titleLine}>
-                {hero.titleStart}
-                <VideoSlot className={styles.videoInline} label={hero.videoPlaceholder} />
-              </span>
-              <span className={styles.nowrap}>{hero.titleMiddle}</span>
-              <em>{hero.titleEnd}</em>
-            </h1>
-
-            <p className={styles.subtitle}>{hero.subtitle}</p>
-
-            <div className={styles.actions}>
-              <a className={styles.primaryBtn} href={links.telegramBotLead}>
-                {hero.primaryCta}
-              </a>
-              <a className={styles.secondaryBtn} href={links.telegramBotTest}>
-                {hero.secondaryCta} <span aria-hidden="true">→</span>
-              </a>
             </div>
           </div>
 
-          {/* Правая колонка: фото (пустой слот) + имя + соцсети */}
-          <div className={styles.personCol} aria-label={hero.personPlaceholder}>
+          <HeroScene />
+
+          <motion.div className={styles.copy} variants={stagger}>
+            <motion.ul className={styles.badges} aria-label="Детали курса" variants={fadeUp}>
+              {hero.badges.map((badge) => <li key={badge}>{badge}</li>)}
+            </motion.ul>
+
+            <motion.h1 className={styles.title} variants={titleStagger}>
+              <motion.span className={styles.titleLine} variants={titleLine}>
+                {hero.titleStart}
+                <VideoSlot className={styles.videoInline} label={hero.videoPlaceholder} />
+              </motion.span>
+              <motion.span className={styles.nowrap} variants={titleLine}>{hero.titleMiddle}</motion.span>
+              <motion.em variants={titleLine}>{hero.titleEnd}</motion.em>
+            </motion.h1>
+
+            <motion.p className={styles.subtitle} variants={fadeUp}>{hero.subtitle}</motion.p>
+
+            <motion.div className={styles.actions} variants={fadeUp}>
+              <motion.a
+                className={styles.primaryBtn}
+                href={links.telegramBotLead}
+                whileHover={{ scale: 1.04, y: -3 }}
+                whileTap={{ scale: 0.97 }}
+              >
+                {hero.primaryCta}
+              </motion.a>
+              <motion.a
+                className={styles.secondaryBtn}
+                href={links.telegramBotTest}
+                whileHover={{ scale: 1.04, y: -3 }}
+                whileTap={{ scale: 0.97 }}
+              >
+                {hero.secondaryCta} <span aria-hidden="true">→</span>
+              </motion.a>
+            </motion.div>
+          </motion.div>
+
+          <motion.div
+            className={styles.personCol}
+            aria-label={hero.personPlaceholder}
+            variants={fadeUp}
+          >
             <div className={styles.scribble} aria-hidden="true" />
-
-            {/* Сюда встанет PNG без фона — не трогать размеры */}
             <div className={styles.photoSlot} aria-hidden="true" />
-
-            {/* Имя + соцсети */}
             <div className={styles.teacherInfo}>
               <p className={styles.teacherName}>{hero.teacherName}</p>
               <div className={styles.socials} aria-label="Социальные сети">
                 {socials.map((s) => (
-                  <a key={s.name} href={s.href} aria-label={s.name} className={styles.socialIcon}>
+                  <motion.a
+                    key={s.name}
+                    href={s.href}
+                    aria-label={s.name}
+                    className={styles.socialIcon}
+                    whileHover={{ y: -4, scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
                     {s.icon}
-                  </a>
+                  </motion.a>
                 ))}
               </div>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </Container>
     </Section>
   );

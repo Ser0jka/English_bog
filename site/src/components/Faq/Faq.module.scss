@@ -95,25 +95,7 @@
   transform: rotate(45deg);
 }
 
-// ── Анимация ответа (grid 0fr → 1fr) ──────────────────────
-.answer {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: hidden;
-}
-
-.answerOpen {
-  grid-template-rows: 1fr;
-}
-
-// Inner wrapper carries overflow:hidden + min-height:0 so the track collapses
-// fully; padding goes on the <p> below, not here.
-.answerInner {
-  min-height: 0;
-  overflow: hidden;
-}
-
+// Анимация раскрытия — Framer Motion AnimatePresence (height: 0 → auto)
 .answerText {
   padding: 0 0 22px;
   font-size: clamp(15px, 1.25vw, 18px);

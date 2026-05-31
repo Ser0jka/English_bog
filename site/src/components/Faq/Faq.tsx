@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Plus, Minus } from "lucide-react";
 import { siteContent } from "@/data/content";
 import { Container } from "@/shared/Container/Container";
 import styles from "./Faq.module.scss";
@@ -16,7 +18,13 @@ export function Faq() {
   return (
     <section id="faq" className={styles.section} aria-label="Частые вопросы">
       <Container>
-        <div className={styles.heading}>
+        <motion.div
+          className={styles.heading}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.5, ease: "easeOut" as const }}
+        >
           <h2 className={styles.title}>
             <em>{faq.heading}</em>
           </h2>
@@ -24,43 +32,50 @@ export function Faq() {
             Уверен, что{" "}
             <em className={styles.subtitleAccent}>читаешь правильно?</em>
           </p>
-        </div>
+        </motion.div>
 
         <ul className={styles.list} role="list">
           {faq.items.map((item, i) => {
             const isOpen = openIdx === i;
             return (
-              <li
+              <motion.li
                 key={i}
-                className={`${styles.item} ${isOpen ? styles.itemOpen : ""}`}
+                className={styles.item}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-20px" }}
+                transition={{ duration: 0.4, ease: "easeOut" as const, delay: i * 0.04 }}
               >
                 <button
                   className={styles.question}
                   onClick={() => toggle(i)}
                   aria-expanded={isOpen}
-                  aria-controls={`faq-${i}`}
                 >
                   <span className={styles.questionText}>{item.q}</span>
-                  <span className={`${styles.icon} ${isOpen ? styles.iconOpen : ""}`} aria-hidden="true">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round">
-                      <line x1="12" y1="5" x2="12" y2="19" />
-                      <line x1="5" y1="12" x2="19" y2="12" />
-                    </svg>
-                  </span>
+                  <motion.span
+                    className={styles.icon}
+                    animate={{ rotate: isOpen ? 0 : 0 }}
+                    aria-hidden="true"
+                  >
+                    {isOpen ? <Minus size={18} /> : <Plus size={18} />}
+                  </motion.span>
                 </button>
 
-                {/* grid trick: 0fr → 1fr; padding lives on inner <p> so the
-                    wrapper can fully collapse to 0 height when closed */}
-                <div
-                  id={`faq-${i}`}
-                  role="region"
-                  className={`${styles.answer} ${isOpen ? styles.answerOpen : ""}`}
-                >
-                  <div className={styles.answerInner}>
-                    <p className={styles.answerText}>{item.a}</p>
-                  </div>
-                </div>
-              </li>
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      key="answer"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.32, ease: "easeInOut" as const }}
+                      style={{ overflow: "hidden" }}
+                    >
+                      <p className={styles.answerText}>{item.a}</p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.li>
             );
           })}
         </ul>
