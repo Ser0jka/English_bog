@@ -1,0 +1,11 @@
+@use "@/styles/variables" as *;
+
+.container {
+  width: min(100% - 48px, $container-width);
+  margin-inline: auto;
+
+  @media (max-width: $breakpoint-sm) {
+    width: min(100% - 32px, $container-width);
+  }
+}
+

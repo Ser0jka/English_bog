@@ -1,0 +1,168 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+// ── Секция ────────────────────────────────────────────────
+.section {
+  background: $color-dark-bg;
+  color: $color-dark-text;
+  padding-top: 80px;
+  padding-bottom: 130px; // больше воздуха снизу → «Стоимость обучения» ниже + место для выезда
+  overflow: hidden;
+}
+
+// ── Вступительный текст (центр) ───────────────────────────
+.intro {
+  text-align: center;
+  margin-bottom: 52px;
+}
+
+.heading {
+  font-size: clamp(34px, 4vw, 66px);
+  font-weight: 400;
+  line-height: 1.12;
+  margin-bottom: 20px;
+}
+
+.headingAccent {
+  font-style: normal;
+  font-weight: 900;
+}
+
+.subtitle {
+  max-width: 720px;
+  margin-inline: auto;
+  font-size: clamp(16px, 1.4vw, 21px);
+  line-height: 1.6;
+  color: $color-dark-muted;
+}
+
+// ── Сцена ─────────────────────────────────────────────────
+.stage {
+  position: relative;
+  width: 100%;
+  min-height: 540px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+// ── Плейсхолдер 1: фон (флаг США) ────────────────────────
+// Пустой div — заменить на <Image fill objectFit="cover" />
+.photoBg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+// ── Плейсхолдер 2: Dave по центру (PNG без фона) ─────────
+// Пустой div — заменить на <Image>, размер сохраняется
+.photoPerson {
+  position: absolute;
+  bottom: 64px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 340px;
+  height: 420px;
+  z-index: 2;
+}
+
+// ── Плейсхолдер 3: облачко-цитата (PNG без фона) ─────────
+// Пустой div — заменить на <Image>, позиция сохраняется
+.photoBubble {
+  position: absolute;
+  top: 10%;
+  right: 12%;
+  width: clamp(200px, 22%, 300px);
+  height: clamp(100px, 14%, 160px);
+  z-index: 3;
+}
+
+// ── Звёзды и "GOD BLESS DAVE" (CSS-верстка) ──────────────
+.stageBottom {
+  position: relative;
+  z-index: 4;
+  width: 100%;
+  text-align: center;
+  will-change: transform; // выезжает снизу вверх (JS-параллакс)
+}
+
+.stars {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 8px;
+
+  span {
+    font-size: clamp(34px, 3.6vw, 56px);
+    color: #c8960c;
+    text-shadow:
+      0 0 18px rgba(200, 150, 12, 0.9),
+      0 2px 5px rgba(0, 0, 0, 0.5);
+  }
+}
+
+// Золотой металлический текст
+.godBless {
+  font-size: clamp(52px, 11vw, 168px);
+  font-weight: 900;
+  letter-spacing: 0.03em;
+  line-height: 0.9;
+  text-transform: uppercase;
+  padding-bottom: 0;
+  background: linear-gradient(
+    180deg,
+    #f5d060 0%,
+    #e8b020 20%,
+    #c48a08 50%,
+    #8b5e04 75%,
+    #c48a08 90%,
+    #f0c030 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: #c8960c; // fallback
+}
+
+// ── Responsive ────────────────────────────────────────────
+@media (max-width: $breakpoint-xl) {
+  .stage { min-height: 480px; }
+  .photoPerson { width: 290px; height: 360px; }
+  .photoBubble { right: 8%; }
+}
+
+@media (max-width: $breakpoint-lg) {
+  .section { padding-top: 64px; padding-bottom: 104px; }
+  .stage { min-height: 420px; }
+  .photoPerson { width: 250px; height: 310px; bottom: 56px; }
+  .photoBubble { width: 200px; top: 8%; right: 4%; }
+}
+
+@media (max-width: $breakpoint-md) {
+  .section { padding-top: 56px; padding-bottom: 88px; }
+  .intro { margin-bottom: 36px; }
+  .stage { min-height: 380px; }
+  .photoPerson { width: 200px; height: 250px; bottom: 48px; }
+  .photoBubble { width: 170px; top: 5%; right: 2%; }
+}
+
+@media (max-width: $breakpoint-sm) {
+  .section { padding-bottom: 76px; }
+  .heading { font-size: clamp(28px, 7vw, 40px); }
+  .stars span { font-size: clamp(28px, 7vw, 40px); }
+  .stage { min-height: 320px; }
+  .photoPerson { width: 160px; height: 200px; bottom: 40px; }
+  .photoBubble {
+    top: 5%;
+    right: 0;
+    width: 140px;
+  }
+}
+
+@media (max-width: $breakpoint-xs) {
+  .godBless { font-size: clamp(42px, 12vw, 64px); }
+  .stage { min-height: 280px; }
+  .photoPerson { width: 130px; height: 165px; }
+  .photoBubble { display: none; } // на 360 убираем облачко — просто нет места
+}

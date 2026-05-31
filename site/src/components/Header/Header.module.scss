@@ -1,0 +1,281 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+// Брейкпоинт при котором nav/cta прячется (900px — иначе ломается при 769-800px)
+$bp-menu: 900px;
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: rgba($color-bg, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba($color-text, 0.07);
+}
+
+.inner {
+  display: flex;
+  min-height: 56px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+// ── Лого ─────────────────────────────────────────────────
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  font-family: $font-display;
+  color: $color-text;
+  font-size: 18px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  transition: opacity $transition;
+
+  &:hover { opacity: 0.65; }
+  &:focus-visible { @include focus-ring; }
+}
+
+.logoTag {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 7px 2px;
+  border-radius: 5px;
+  background: $color-accent;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+// ── Навигация ─────────────────────────────────────────────
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  font-size: 16px;
+  font-weight: 600;
+  color: $color-text;
+
+  a {
+    white-space: nowrap;
+    transition: color $transition;
+    &:hover { color: $color-accent; }
+    &:focus-visible { @include focus-ring; }
+  }
+}
+
+// ── CTA ───────────────────────────────────────────────────
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+  min-height: 38px;
+  border: 1.5px solid $color-text;
+  border-radius: 999px;
+  padding: 6px 20px;
+  color: $color-text;
+  font-size: 15px;
+  font-weight: 800;
+  white-space: nowrap;
+  transition:
+    background $transition,
+    color $transition,
+    border-color $transition,
+    transform $transition;
+
+  &:hover {
+    background: $color-text;
+    color: $color-bg;
+    transform: translateY(-1px);
+  }
+  &:focus-visible { @include focus-ring; }
+}
+
+// ── Бургер ───────────────────────────────────────────────
+.menuButton {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 6px;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border: 0;
+  background: transparent;
+  padding: 4px 2px;
+  cursor: pointer;
+
+  span {
+    display: block;
+    height: 2.5px;
+    border-radius: 999px;
+    background: $color-text;
+    transition: width $transition;
+  }
+
+  span:first-child { width: 24px; }
+  span:last-child  { width: 16px; }
+
+  &:hover span:last-child { width: 24px; }
+  &:focus-visible { @include focus-ring; }
+}
+
+// ── Backdrop ─────────────────────────────────────────────
+.backdrop {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 35;
+  background: transparent;
+  transition: background 0.3s ease;
+}
+
+.backdropOpen {
+  pointer-events: auto;
+  background: rgba(0, 0, 0, 0.72);
+}
+
+// ── Мобильное меню ───────────────────────────────────────
+.mobileMenu {
+  position: fixed;
+  inset-block: 0;
+  right: 0;
+  z-index: 40;
+  display: flex;
+  width: min(86vw, 340px);
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 60px 32px 48px;
+  background: #070707;
+  color: #ffffff;
+  transform: translateX(102%);
+  transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: auto;
+}
+
+.mobileMenuOpen {
+  transform: translateX(0);
+}
+
+.closeButton {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  padding: 0;
+  cursor: pointer;
+  transition: background $transition;
+
+  &:hover { background: rgba(255, 255, 255, 0.16); }
+  &:focus-visible {
+    @include focus-ring;
+    outline-color: rgba(255, 255, 255, 0.6);
+  }
+
+  span {
+    position: absolute;
+    width: 20px;
+    height: 2px;
+    border-radius: 999px;
+    background: currentColor;
+  }
+
+  span:first-child { transform: rotate(45deg); }
+  span:last-child  { transform: rotate(-45deg); }
+}
+
+.mobileNav {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  font-size: 32px;
+  font-weight: 900;
+
+  a {
+    width: fit-content;
+    transition:
+      color $transition,
+      transform $transition;
+
+    &:hover {
+      color: $color-accent-hover;
+      transform: translateX(5px);
+    }
+
+    &:focus-visible {
+      @include focus-ring;
+      outline-color: rgba(255, 255, 255, 0.6);
+    }
+  }
+}
+
+.mobileCta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 62px;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #070707;
+  font-size: 18px;
+  font-weight: 900;
+  transition:
+    background $transition,
+    color $transition;
+
+  &:hover {
+    background: $color-accent;
+    color: #ffffff;
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+    outline-color: rgba(255, 255, 255, 0.6);
+  }
+}
+
+// ── Responsive ───────────────────────────────────────────
+
+// Небольшое сжатие nav-gap на средних экранах
+@media (max-width: 1100px) {
+  .nav { gap: 20px; }
+}
+
+// Главный брейкпоинт хедера — 900px
+@media (max-width: $bp-menu) {
+  .nav,
+  .cta {
+    display: none;
+  }
+
+  .menuButton {
+    display: flex;
+  }
+}
+
+@media (max-width: $breakpoint-xs) {
+  .logo { font-size: 16px; }
+
+  .mobileMenu {
+    width: calc(100vw - 12px);
+  }
+}

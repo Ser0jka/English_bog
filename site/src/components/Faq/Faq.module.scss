@@ -1,0 +1,155 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.section {
+  background: $color-bg;
+  padding-block: 80px 100px;
+}
+
+// ── Заголовок ─────────────────────────────────────────────
+.heading {
+  text-align: center;
+  margin-bottom: 52px;
+}
+
+.title {
+  font-size: clamp(64px, 9.5vw, 132px);
+  font-weight: 900;
+  font-style: italic;
+  color: $color-accent;
+  line-height: 1;
+  margin-bottom: 14px;
+}
+
+.subtitle {
+  font-size: clamp(16px, 1.5vw, 22px);
+  color: $color-muted;
+  line-height: 1.5;
+}
+
+.subtitleAccent {
+  font-style: italic;
+  font-weight: 700;
+  color: $color-text;
+}
+
+// ── Список ────────────────────────────────────────────────
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-width: 920px;
+  margin-inline: auto;
+}
+
+// ── Элемент ───────────────────────────────────────────────
+.item {
+  border-bottom: 1px solid $color-border;
+
+  &:first-child {
+    border-top: 1px solid $color-border;
+  }
+}
+
+// ── Кнопка вопроса ────────────────────────────────────────
+.question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 22px 0;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  text-align: left;
+
+  &:focus-visible {
+    @include focus-ring;
+    outline-offset: 3px;
+  }
+}
+
+.questionText {
+  font-size: clamp(16px, 1.45vw, 21px);
+  font-weight: 500;
+  color: $color-text;
+  line-height: 1.4;
+}
+
+// ── Круглая + кнопка ──────────────────────────────────────
+.icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: $color-accent;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, background 0.2s ease;
+}
+
+.iconOpen {
+  transform: rotate(45deg);
+}
+
+// ── Анимация ответа (grid 0fr → 1fr) ──────────────────────
+.answer {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.answerOpen {
+  grid-template-rows: 1fr;
+}
+
+// Inner wrapper carries overflow:hidden + min-height:0 so the track collapses
+// fully; padding goes on the <p> below, not here.
+.answerInner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.answerText {
+  padding: 0 0 22px;
+  font-size: clamp(15px, 1.25vw, 18px);
+  color: $color-muted;
+  line-height: 1.75;
+  max-width: 780px;
+}
+
+// ── Responsive ────────────────────────────────────────────
+
+@media (max-width: $breakpoint-md) {
+  .section {
+    padding-block: 56px 72px;
+  }
+
+  .heading {
+    margin-bottom: 36px;
+  }
+
+  .question {
+    padding: 20px 0;
+    gap: 16px;
+  }
+
+  .icon {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+@media (max-width: $breakpoint-sm) {
+  .section {
+    padding-block: 48px 64px;
+  }
+
+  .title {
+    font-size: clamp(48px, 15vw, 96px);
+  }
+}

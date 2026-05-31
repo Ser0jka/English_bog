@@ -1,0 +1,291 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+// ── Секция (тёмный фон) ───────────────────────────────────
+.section {
+  background: $color-dark-bg;
+  padding-block: 80px 100px;
+}
+
+// ── Шапка секции ─────────────────────────────────────────
+.heading {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.title {
+  font-size: clamp(34px, 4.8vw, 72px);
+  font-weight: 400;
+  color: $color-dark-text;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+.titleAccent {
+  font-style: italic;
+  font-weight: 900;
+}
+
+.badge {
+  display: inline-block;
+  margin-left: 12px;
+  font-size: 0.55em;
+  vertical-align: middle;
+  background: #1d4ed8;
+  color: #fff;
+  border-radius: 6px;
+  padding: 2px 8px;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.6;
+}
+
+.subtitle {
+  font-size: clamp(16px, 1.6vw, 22px);
+  color: $color-dark-muted;
+  max-width: 620px;
+  margin-inline: auto;
+  line-height: 1.5;
+}
+
+// ── Основная карточка ─────────────────────────────────────
+.card {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  background: $color-bg;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  min-height: 480px;
+}
+
+// ── Левая колонка ─────────────────────────────────────────
+.cardLeft {
+  background: linear-gradient(160deg, #e8e2d5 0%, #d6cfc0 100%);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 36px 32px 32px;
+  overflow: hidden;
+}
+
+.tariff {
+  font-family: $font-display;
+  font-size: clamp(26px, 3.2vw, 44px);
+  font-weight: 900;
+  font-style: italic;
+  color: $color-text;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  position: relative;
+  z-index: 1;
+  max-width: 200px;
+}
+
+// Фото-заглушка (пустой div, заменить на <Image>)
+.photoSlot {
+  flex: 1;
+  width: 100%;
+  max-width: 280px;
+  align-self: flex-end;
+  border-radius: $radius-md $radius-md 0 0;
+  margin-top: 16px;
+}
+
+// Облачко-заглушка (пустой div, заменить на <Image>)
+.bubbleSlot {
+  position: absolute;
+  bottom: 32px;
+  right: 24px;
+  background: $color-card;
+  border-radius: 20px 20px 4px 20px;
+  padding: 10px 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  z-index: 2;
+}
+
+.bubbleText {
+  font-size: 15px;
+  font-weight: 700;
+  color: $color-text;
+  white-space: nowrap;
+}
+
+// ── Правая колонка ────────────────────────────────────────
+.cardRight {
+  padding: 44px 48px 44px 44px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+// ── Список преимуществ ────────────────────────────────────
+.benefits {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 1;
+}
+
+.benefit {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  font-size: clamp(15px, 1.25vw, 18px);
+  color: $color-text;
+  line-height: 1.5;
+}
+
+.benefitIcon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: $color-accent;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+}
+
+// ── Цена ─────────────────────────────────────────────────
+.priceRow {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.priceNew {
+  font-family: $font-display;
+  font-size: clamp(36px, 4.2vw, 60px);
+  font-weight: 900;
+  color: $color-text;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.priceOld {
+  font-size: clamp(18px, 2.2vw, 28px);
+  color: $color-muted;
+  text-decoration: line-through;
+  font-weight: 400;
+}
+
+// ── CTA кнопка ───────────────────────────────────────────
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: $color-accent;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 18px 40px;
+  border-radius: $radius-sm;
+  text-decoration: none;
+  align-self: flex-start;
+  transition: background $transition;
+
+  &:hover {
+    background: $color-accent-hover;
+  }
+}
+
+// ── Примечание об оплате ──────────────────────────────────
+.payNote {
+  font-size: 14px;
+  color: $color-muted;
+  line-height: 1.5;
+  max-width: 420px;
+}
+
+// ── Responsive ────────────────────────────────────────────
+
+@media (max-width: 1100px) {
+  .card {
+    grid-template-columns: 320px 1fr;
+  }
+
+  .cardRight {
+    padding: 36px 36px 36px 36px;
+  }
+}
+
+@media (max-width: $breakpoint-lg) {
+  .card {
+    grid-template-columns: 260px 1fr;
+  }
+
+  .cardLeft {
+    padding: 28px 24px 28px;
+  }
+
+  .cardRight {
+    padding: 28px 28px 28px 28px;
+    gap: 20px;
+  }
+}
+
+// ≤ 768px: вертикальный стек
+@media (max-width: $breakpoint-md) {
+  .section {
+    padding-block: 56px 72px;
+  }
+
+  .heading {
+    margin-bottom: 32px;
+  }
+
+  .card {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  .cardLeft {
+    min-height: 280px;
+    padding: 28px 24px 24px;
+  }
+
+  .photoSlot {
+    max-width: 180px;
+    max-height: 200px;
+  }
+
+  .cardRight {
+    padding: 32px 24px 36px;
+    gap: 20px;
+  }
+}
+
+@media (max-width: $breakpoint-sm) {
+  .section {
+    padding-block: 48px 64px;
+  }
+
+  .cardLeft {
+    min-height: 240px;
+  }
+
+  .cta {
+    width: 100%;
+    justify-content: center;
+    padding: 15px 24px;
+  }
+}
+
+@media (max-width: $breakpoint-xs) {
+  .card {
+    border-radius: $radius-md;
+  }
+
+  .cardRight {
+    padding: 24px 20px 28px;
+  }
+}

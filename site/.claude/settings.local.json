@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-Content *)",
+      "Bash(Get-ChildItem -Recurse \"C:\\\\Users\\\\sersu\\\\Desktop\\\\English_bog\\\\site\\\\src\\\\components\")",
+      "Bash(Select-Object FullName)",
+      "Bash(npx next *)",
+      "Read(//c/Program Files/Google/Chrome/Application/**)",
+      "Read(//c/Program Files \\(x86\\)/Microsoft/Edge/Application/**)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3007)",
+      "Bash(npm install *)",
+      "Bash(break)",
+      "Bash(pnpm add *)",
+      "Bash(node debug.js)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3007)",
+      "Bash(node shot.js)",
+      "Bash(rm -f shot.js debug.js)",
+      "Bash(rm -rf shots)",
+      "Bash(pnpm remove *)"
+    ]
+  }
+}

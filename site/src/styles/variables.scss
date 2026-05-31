@@ -1,0 +1,36 @@
+// Light sections
+$color-bg: #f7f6f1;
+$color-text: #070707;
+$color-muted: rgba(7, 7, 7, 0.68);
+$color-accent: #a92727;
+$color-accent-hover: #d63333;
+$color-card: #ffffff;
+$color-border: rgba(7, 7, 7, 0.14);
+
+// Dark sections (footer, blessedblock, skillcarousel, bigCta)
+$color-dark-bg: #0e0e0e;
+$color-dark-text: #ffffff;
+$color-dark-muted: rgba(255, 255, 255, 0.52);
+$color-dark-border: rgba(255, 255, 255, 0.12);
+
+// Hero gradient colors
+$color-hero-from: #b42a2a;
+$color-hero-to: #7f1919;
+
+// ── Typography ────────────────────────────────────────────
+// --font-display (Montserrat) и --font-gilroy (Manrope ≈ Gilroy) задаются в layout.tsx
+$font-display: var(--font-display), "Montserrat", system-ui, sans-serif;
+$font-body: var(--font-gilroy), "Manrope", system-ui, sans-serif;
+
+$container-width: 1840px;
+$radius-lg: 24px;
+$radius-md: 16px;
+$radius-sm: 10px;
+
+$transition: 0.2s ease;
+
+$breakpoint-xl: 1200px;
+$breakpoint-lg: 992px;
+$breakpoint-md: 768px;
+$breakpoint-sm: 480px;
+$breakpoint-xs: 360px;

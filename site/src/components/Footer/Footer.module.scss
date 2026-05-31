@@ -1,0 +1,277 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.footer {
+  background: $color-dark-bg;
+  color: $color-dark-text;
+  padding-block: 52px 64px;
+}
+
+// Обёртка с position: relative для абсолютной Up-кнопки
+.inner {
+  position: relative;
+}
+
+// ── Up-кнопка ─────────────────────────────────────────────
+.upButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+
+  &:hover .upCircle {
+    background: $color-accent-hover;
+    transform: translateY(-4px);
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+    outline-offset: 6px;
+    outline-color: rgba($color-accent, 0.75);
+  }
+}
+
+.upCircle {
+  display: flex;
+  width: 54px;
+  height: 54px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: $color-accent;
+  color: #ffffff;
+  transition:
+    background $transition,
+    transform $transition;
+}
+
+.upLabel {
+  color: $color-dark-text;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+// ── Грид ──────────────────────────────────────────────────
+// Правая колонка получает отступ справа, чтобы Up-кнопка не перекрывала
+.grid {
+  display: grid;
+  grid-template-columns: 240px 160px 1fr 1fr;
+  gap: 0 56px;
+  align-items: start;
+  // Место под Up-кнопку справа (54px кнопка + небольшой gap)
+  padding-right: 80px;
+}
+
+// ── Колонка 1: Бренд ──────────────────────────────────────
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  font-family: $font-display;
+  color: $color-dark-text;
+  font-size: 38px;
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  transition: opacity $transition;
+
+  &:hover {
+    opacity: 0.72;
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+    outline-color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+.socials {
+  display: flex;
+  gap: 8px;
+}
+
+.socialIcon {
+  display: inline-flex;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  color: $color-dark-text;
+  transition:
+    background $transition,
+    border-color $transition,
+    transform $transition;
+
+  &:hover {
+    background: $color-accent;
+    border-color: $color-accent;
+    transform: translateY(-3px);
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+    outline-color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+// ── Колонки 2-4 ───────────────────────────────────────────
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.colTitle {
+  margin-bottom: 4px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: $color-dark-muted;
+}
+
+.navLink {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  color: $color-dark-text;
+  transition: color $transition;
+
+  &:hover {
+    color: $color-accent-hover;
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+    outline-color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+.navLinkAccent {
+  color: $color-accent;
+
+  &:hover {
+    color: $color-accent-hover;
+  }
+}
+
+.email {
+  font-size: 22px;
+  font-weight: 800;
+  color: $color-dark-text;
+  overflow-wrap: break-word;
+  transition: color $transition;
+
+  &:hover {
+    color: $color-accent-hover;
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+    outline-color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+.legalName {
+  font-size: 14px;
+  font-weight: 700;
+  color: $color-dark-text;
+  margin-bottom: 6px;
+}
+
+.legalText {
+  font-size: 13px;
+  line-height: 1.7;
+  color: $color-dark-muted;
+}
+
+// ── Responsive ────────────────────────────────────────────
+@media (max-width: 1100px) {
+  .grid {
+    grid-template-columns: 200px 140px 1fr 1fr;
+    gap: 0 36px;
+  }
+
+  .logo {
+    font-size: 32px;
+  }
+
+  .email {
+    font-size: 17px;
+  }
+}
+
+@media (max-width: $breakpoint-lg) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px 40px;
+    padding-right: 0;
+  }
+
+  .brand {
+    grid-column: 1 / -1;
+  }
+
+  .upButton {
+    position: static;
+    flex-direction: row;
+    gap: 12px;
+    margin-bottom: 36px;
+    align-self: flex-start;
+  }
+
+  .inner {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  .footer {
+    padding-block: 44px 56px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .brand {
+    grid-column: auto;
+  }
+
+  .logo {
+    font-size: 36px;
+  }
+
+  .email {
+    font-size: 17px;
+  }
+}
+
+@media (max-width: $breakpoint-sm) {
+  .upCircle {
+    width: 46px;
+    height: 46px;
+  }
+
+  .logo {
+    font-size: 30px;
+  }
+}

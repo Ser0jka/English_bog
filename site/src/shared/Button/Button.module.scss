@@ -1,0 +1,55 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.button {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  border-radius: $radius-sm;
+  padding: 13px 22px;
+  font-weight: 700;
+  transition:
+    background $transition,
+    border-color $transition,
+    color $transition,
+    transform $transition;
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+.primary {
+  background: $color-accent;
+  color: $color-text;
+
+  &:hover {
+    background: $color-accent-hover;
+  }
+}
+
+.secondary {
+  border-color: $color-border;
+  background: $color-card;
+  color: $color-text;
+
+  &:hover {
+    border-color: rgba($color-text, 0.32);
+  }
+}
+
+.ghost {
+  background: transparent;
+  color: $color-muted;
+
+  &:hover {
+    color: $color-text;
+  }
+}
+

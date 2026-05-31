@@ -1,0 +1,175 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.section {
+  position: relative;
+  overflow: hidden;
+  background: #141414;
+  min-height: 64vh;
+  display: flex;
+  align-items: center;
+  padding-block: 60px;
+}
+
+// ── Compass-rose background ────────────────────────────────
+.bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(820px, 110vw);
+  height: min(820px, 110vw);
+  pointer-events: none;
+}
+
+// ── Video card (shared) ────────────────────────────────────
+.videoCard {
+  position: absolute;
+  top: 50%;
+  width: clamp(170px, 19vw, 280px);
+  aspect-ratio: 16 / 10;
+  border-radius: $radius-md;
+  background:
+    radial-gradient(ellipse at 62% 32%, rgba(220, 160, 80, 0.5), transparent 52%),
+    radial-gradient(ellipse at 28% 72%, rgba(170, 80, 40, 0.4), transparent 50%),
+    linear-gradient(140deg, #301808, #180a02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 56px rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.videoLeft {
+  left: clamp(16px, 5vw, 80px);
+  transform: translateY(-56%) rotate(-8deg);
+}
+
+.videoRight {
+  right: clamp(16px, 5vw, 80px);
+  transform: translateY(-56%) rotate(7deg);
+}
+
+.play {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.82);
+  position: relative;
+  flex-shrink: 0;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 56%;
+    width: 0;
+    height: 0;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 12px solid $color-accent;
+    transform: translate(-50%, -50%);
+  }
+}
+
+// ── Center content ─────────────────────────────────────────
+.content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  // padding pushes text away from the absolutely-positioned cards
+  padding-inline: clamp(190px, 24vw, 350px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+// ── Декоративные точки ••• (как в ForWhom) ────────────────
+.dots {
+  display: flex;
+  gap: 9px;
+
+  i {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: $color-accent;
+  }
+}
+
+.text {
+  font-size: clamp(28px, 4.2vw, 64px);
+  line-height: 1.24;
+  font-weight: 400;
+  color: $color-dark-text;
+  margin-top: 4px;
+  margin-bottom: 16px;
+}
+
+.accent {
+  font-style: italic;
+  font-weight: 900;
+}
+
+// ── Pill button — magnetic target ──────────────────────────
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #c92f2f;
+  color: $color-dark-text;
+  font-size: clamp(13px, 1.15vw, 16px);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 17px 40px;
+  border-radius: 100px;
+  border: 1.5px solid rgba(255, 255, 255, 0.42);
+  text-decoration: none;
+  will-change: transform;
+
+  &:hover {
+    // background: rgba(144, 32, 32, 0.7);
+    border-color: rgba(255, 255, 255, 0.72);
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+    outline-color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+// ── Responsive ────────────────────────────────────────────
+
+@media (max-width: $breakpoint-lg) {
+  .content {
+    padding-inline: clamp(150px, 20vw, 260px);
+  }
+}
+
+// ≤ 768px: прячем карточки, снимаем padding
+@media (max-width: $breakpoint-md) {
+  .section {
+    min-height: auto;
+    padding-block: 72px 80px;
+  }
+
+  .videoCard {
+    display: none;
+  }
+
+  .content {
+    padding-inline: 0;
+    gap: 32px;
+  }
+}
+
+@media (max-width: $breakpoint-sm) {
+  .cta {
+    width: 100%;
+    justify-content: center;
+    padding: 16px 24px;
+  }
+}

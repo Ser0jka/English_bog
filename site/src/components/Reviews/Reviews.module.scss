@@ -1,0 +1,187 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.section {
+  background: $color-bg;
+  padding-block: 80px 100px;
+}
+
+// ── Шапка: заголовок + стрелки ────────────────────────────
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.title {
+  font-size: clamp(30px, 3.8vw, 60px);
+  font-weight: 400;
+  color: $color-text;
+  line-height: 1.15;
+}
+
+.titleAccent {
+  font-style: italic;
+  font-weight: 900;
+  color: $color-accent;
+}
+
+// ── Стрелки ───────────────────────────────────────────────
+.nav {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+  padding-top: 6px;
+}
+
+.arrow {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 0;
+  background: $color-accent;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background $transition, transform $transition, opacity $transition;
+
+  &:hover:not(:disabled) {
+    background: $color-accent-hover;
+    transform: scale(1.08);
+  }
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+// ── Карусель ──────────────────────────────────────────────
+.viewport {
+  overflow: hidden;
+}
+
+.track {
+  display: flex;
+  gap: 20px;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+// ── Карточки ──────────────────────────────────────────────
+.card {
+  flex-shrink: 0;
+  // Desktop: 3 per row
+  width: calc((100% - 40px) / 3);
+  background: $color-card;
+  border-radius: $radius-md;
+  border: 1px solid $color-border;
+  padding: 28px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+.cardHead {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+// Аватар-инициал (вместо пустой картинки)
+.avatar {
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, $color-accent, $color-accent-hover);
+  color: #fff;
+  font-size: 20px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.cardMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.author {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 16px;
+  font-weight: 700;
+  color: $color-text;
+}
+
+.verified {
+  flex-shrink: 0;
+}
+
+.stars {
+  font-size: 16px;
+  color: $color-accent;
+  letter-spacing: 1px;
+  line-height: 1;
+}
+
+.text {
+  font-size: clamp(15px, 1.2vw, 18px);
+  color: $color-muted;
+  line-height: 1.7;
+  flex: 1;
+}
+
+// ── Responsive ────────────────────────────────────────────
+
+@media (max-width: $breakpoint-lg) {
+  .card {
+    // 2 per row
+    width: calc((100% - 20px) / 2);
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  .section {
+    padding-block: 56px 72px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+
+  .card {
+    // 1 per row
+    width: calc(100%);
+  }
+}
+
+@media (max-width: $breakpoint-sm) {
+  .section {
+    padding-block: 48px 64px;
+  }
+
+  .arrow {
+    width: 40px;
+    height: 40px;
+  }
+}
