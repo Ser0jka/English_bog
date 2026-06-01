@@ -62,15 +62,17 @@
   flex-direction: row-reverse;
   align-items: center;
   gap: clamp(32px, 4vw, 64px);
-  padding-inline: max(24px, calc((100vw - 1200px) / 2 + 24px));
+  padding-inline: max(24px, calc((100vw - 1650px) / 2 + 24px));
   padding-bottom: 48px;
 }
 
 // Нумерация — над вопросом
 .slideNum {
-  font-size: clamp(26px, 2.4vw, 40px);
-  font-weight: 900;
-  color: $color-dark-muted;
+  font-style: italic;
+  padding: 0 10px;
+  font-size: 34px;
+  font-weight: 600;
+  color: $color-accent;
   line-height: 1;
 }
 
@@ -87,6 +89,7 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
   gap: 18px;
 }
 
@@ -110,8 +113,8 @@
 .videoSlot {
   flex-shrink: 0;
   position: relative;
-  width: clamp(240px, 27vw, 360px);
-  height: clamp(150px, 16.5vw, 225px);
+  width: clamp(260px, 32vw, 450px);
+  aspect-ratio: 1.2 / 1;
   border-radius: $radius-md;
   background:
     radial-gradient(circle at 50% 30%, rgba(255, 220, 200, 0.14), transparent 50%),
@@ -122,6 +125,8 @@
   justify-content: center;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
 }
+
+
 
 .videoPlay {
   width: 38px;

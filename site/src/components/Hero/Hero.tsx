@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import { links } from "@/data/links";
 import { siteContent } from "@/data/content";
 import { Container } from "@/shared/Container/Container";
@@ -44,11 +45,11 @@ const socials = [
 const TICKER_ITEMS = [
   "АМЕРИКАНСКОЕ ПРОИЗНОШЕНИЕ",
   "УВЕРЕННАЯ РЕЧЬ",
-  "7 УРОКОВ",
+  "ЛЕТНИЙ НАБОР",
   "С НУЛЯ ДО НОСИТЕЛЯ",
   "ПОСТАВЬ АКЦЕНТ",
   "НАЧНИ ПОНИМАТЬ НОСИТЕЛЕЙ",
-  "DAVE ENGLISHBAD",
+  "ИВАН БОГОМОЛОВ",
 ];
 
 const fadeUp = {
@@ -105,7 +106,7 @@ export function Hero() {
             <motion.h1 className={styles.title} variants={titleStagger}>
               <motion.span className={styles.titleLine} variants={titleLine}>
                 {hero.titleStart}
-                <VideoSlot className={styles.videoInline} label={hero.videoPlaceholder} />
+                <VideoSlot className={styles.videoInline} videoSrc="/videos/american-psycho-nodd.gif" label={hero.videoPlaceholder} />
               </motion.span>
               <motion.span className={styles.nowrap} variants={titleLine}>{hero.titleMiddle}</motion.span>
               <motion.em variants={titleLine}>{hero.titleEnd}</motion.em>
@@ -139,7 +140,15 @@ export function Hero() {
             variants={fadeUp}
           >
             <div className={styles.scribble} aria-hidden="true" />
-            <div className={styles.photoSlot} aria-hidden="true" />
+            <div className={styles.photoSlot}>
+              <Image
+                src="/images/promo.png"
+                alt={hero.teacherName}
+                fill
+                style={{ objectFit: "contain", objectPosition: "bottom center" }}
+                priority
+              />
+            </div>
             <div className={styles.teacherInfo}>
               <p className={styles.teacherName}>{hero.teacherName}</p>
               <div className={styles.socials} aria-label="Социальные сети">

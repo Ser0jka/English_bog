@@ -20,7 +20,7 @@
 
 .ratingStars {
   color: #f5a623;
-  font-size: 16px;
+  font-size: 20px;
   letter-spacing: 3px;
 }
 
@@ -39,7 +39,7 @@
 }
 
 .ratingCount {
-  font-size: 14px;
+  font-size: 20px;
   font-weight: 600;
   color: $color-muted;
 }
@@ -163,7 +163,7 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 700;
   color: $color-text;
 }
@@ -173,14 +173,14 @@
 }
 
 .stars {
-  font-size: 16px;
+  font-size: 20px;
   color: $color-accent;
   letter-spacing: 1px;
   line-height: 1;
 }
 
 .text {
-  font-size: clamp(15px, 1.2vw, 18px);
+  font-size: 20px;
   color: $color-muted;
   line-height: 1.7;
   flex: 1;

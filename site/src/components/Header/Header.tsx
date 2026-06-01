@@ -23,8 +23,8 @@ export function Header() {
     <>
       <header className={styles.header}>
         <Container className={styles.inner}>
-          <a className={styles.logo} href="#top" aria-label="Dave Englishbad — на главную">
-            Dave Englishbad <span className={styles.logoTag}>us</span>
+          <a className={styles.logo} href="#top" aria-label="Ivan Bogomolov — на главную">
+            Ivan Bogomolov <span className={styles.logoTag}>us</span>
           </a>
 
           <nav className={styles.nav} aria-label="Основная навигация">

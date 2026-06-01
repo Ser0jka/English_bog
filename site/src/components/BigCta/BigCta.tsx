@@ -82,7 +82,7 @@ export function BigCta() {
       {/* Video — left */}
       <div className={`${styles.videoCard} ${styles.videoLeft}`} aria-hidden="true">
         <img
-          src="/videos/american-psycho-nodd.gif"
+          src="/videos/kung-fu-panda.gif"
           alt=""
           className={styles.videoMedia}
         />
@@ -91,7 +91,7 @@ export function BigCta() {
       {/* Video — right */}
       <div className={`${styles.videoCard} ${styles.videoRight}`} aria-hidden="true">
         <img
-          src="/videos/american-psycho-nodd.gif"
+          src="/videos/showing-my-powers-po.gif"
           alt=""
           className={styles.videoMedia}
         />
