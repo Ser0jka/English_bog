@@ -6,11 +6,8 @@ import styles from "./VideoSlot.module.scss";
  * Лежит в public/videos. Сейчас это .gif, но компонент сам
  * выберет <video> для mp4/webm — достаточно поменять путь.
  */
-const VIDEO_SRC = "/videos/american-psycho-nodd.gif";
-
-const isPlayableVideo = /\.(mp4|webm|ogg|mov)$/i.test(VIDEO_SRC);
-
 interface VideoSlotProps {
+  videoSrc: string;
   /** Класс блока-слота (размер/форма) из модуля компонента */
   className?: string;
   /** Для наклона и прочих точечных правок */
@@ -19,9 +16,12 @@ interface VideoSlotProps {
   label?: string;
 }
 
+
 // Видео-плейсхолдер: заполняет слот реальным видео (или gif как fallback)
-export function VideoSlot({ className, style, label }: VideoSlotProps) {
+export function VideoSlot({videoSrc, className, style, label }: VideoSlotProps) {
   const slotClass = className ? `${styles.slot} ${className}` : styles.slot;
+
+  const isPlayableVideo = /\.(mp4|webm|ogg|mov)$/i.test(videoSrc);
 
   return (
     <span className={slotClass} style={style} role="img" aria-label={label}>
@@ -34,12 +34,12 @@ export function VideoSlot({ className, style, label }: VideoSlotProps) {
           playsInline
           preload="auto"
         >
-          <source src={VIDEO_SRC} />
+          <source src={videoSrc} />
         </video>
       ) : (
         // gif анимируется сам — рендерим как картинку
         // eslint-disable-next-line @next/next/no-img-element
-        <img className={styles.media} src={VIDEO_SRC} alt={label ?? ""} />
+        <img className={styles.media} src={videoSrc} alt={label ?? ""} />
       )}
     </span>
   );

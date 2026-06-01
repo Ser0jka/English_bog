@@ -6,8 +6,10 @@
   background: $color-dark-bg;
   color: $color-dark-text;
   padding-top: 80px;
-  padding-bottom: 130px; // больше воздуха снизу → «Стоимость обучения» ниже + место для выезда
+  padding-bottom: 130px;
   overflow: hidden;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
 }
 
 // ── Вступительный текст (центр) ───────────────────────────
@@ -40,35 +42,47 @@
 .stage {
   position: relative;
   width: 100%;
-  min-height: 540px;
+  min-height: 920px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
+  overflow: hidden;
+
+  // нижний градиент — тонирует низ фото, делая золотой текст читаемым
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    inset-inline: 0;
+    height: 60%;
+    background: linear-gradient(to top, $color-dark-bg 15%, transparent 100%);
+    z-index: 2;
+    pointer-events: none;
+  }
 }
 
-// ── Плейсхолдер 1: фон (флаг США) ────────────────────────
-// Пустой div — заменить на <Image fill objectFit="cover" />
-.photoBg {
+// ── Фоновое фото bless.png ────────────────────────────────
+.blessImgWrap {
   position: absolute;
-  inset: 0;
-  z-index: 0;
-}
-
-// ── Плейсхолдер 2: Dave по центру (PNG без фона) ─────────
-// Пустой div — заменить на <Image>, размер сохраняется
-.photoPerson {
-  position: absolute;
-  bottom: 64px;
+  bottom: 0;
   left: 50%;
-  transform: translateX(-50%);
-  width: 340px;
-  height: 420px;
-  z-index: 2;
+  height: 100%;
+  z-index: 1;
+  opacity: 0;           // начальное — JS сразу переопределяет
+  will-change: transform, opacity;
+  pointer-events: none;
 }
 
-// ── Плейсхолдер 3: облачко-цитата (PNG без фона) ─────────
-// Пустой div — заменить на <Image>, позиция сохраняется
+.blessImg {
+  display: block;
+  height: 100%;
+  width: auto;
+  max-width: none; // override reset max-width: 100%
+}
+
+// ── Плейсхолдер: облачко-цитата (PNG без фона) ───────────
+// Заменить на <Image>, позиция сохраняется
 .photoBubble {
   position: absolute;
   top: 10%;
@@ -127,23 +141,20 @@
 
 // ── Responsive ────────────────────────────────────────────
 @media (max-width: $breakpoint-xl) {
-  .stage { min-height: 480px; }
-  .photoPerson { width: 290px; height: 360px; }
+  .stage { min-height: 760px; }
   .photoBubble { right: 8%; }
 }
 
 @media (max-width: $breakpoint-lg) {
   .section { padding-top: 64px; padding-bottom: 104px; }
-  .stage { min-height: 420px; }
-  .photoPerson { width: 250px; height: 310px; bottom: 56px; }
+  .stage { min-height: 660px; }
   .photoBubble { width: 200px; top: 8%; right: 4%; }
 }
 
 @media (max-width: $breakpoint-md) {
   .section { padding-top: 56px; padding-bottom: 88px; }
   .intro { margin-bottom: 36px; }
-  .stage { min-height: 380px; }
-  .photoPerson { width: 200px; height: 250px; bottom: 48px; }
+  .stage { min-height: 560px; }
   .photoBubble { width: 170px; top: 5%; right: 2%; }
 }
 
@@ -151,18 +162,12 @@
   .section { padding-bottom: 76px; }
   .heading { font-size: clamp(28px, 7vw, 40px); }
   .stars span { font-size: clamp(28px, 7vw, 40px); }
-  .stage { min-height: 320px; }
-  .photoPerson { width: 160px; height: 200px; bottom: 40px; }
-  .photoBubble {
-    top: 5%;
-    right: 0;
-    width: 140px;
-  }
+  .stage { min-height: 460px; }
+  .photoBubble { top: 5%; right: 0; width: 140px; }
 }
 
 @media (max-width: $breakpoint-xs) {
   .godBless { font-size: clamp(42px, 12vw, 64px); }
-  .stage { min-height: 280px; }
-  .photoPerson { width: 130px; height: 165px; }
-  .photoBubble { display: none; } // на 360 убираем облачко — просто нет места
+  .stage { min-height: 380px; }
+  .photoBubble { display: none; }
 }

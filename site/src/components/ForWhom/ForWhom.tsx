@@ -49,7 +49,7 @@ export function ForWhom() {
           viewport={{ once: true, margin: "-60px" }}
           variants={fadeUp}
         >
-          {forWhom.heading}{" "}
+          {forWhom.heading}{" "}<br/>
           <em className={styles.headingAccent}>{forWhom.headingAccent}</em>
         </motion.h2>
 
@@ -63,7 +63,7 @@ export function ForWhom() {
             variants={fadeLeft}
           >
             <div className={styles.daveHeader}>
-              <div className={styles.avatar} aria-label="Фото Dave" />
+              <div className={styles.avatar} aria-label="Фото Ivan" />
               <div className={styles.daveMeta}>
                 <strong className={styles.daveName}>{forWhom.dave.name}</strong>
                 <span className={styles.daveRole}>{forWhom.dave.role}</span>
@@ -87,10 +87,10 @@ export function ForWhom() {
             variants={stagger}
           >
             <motion.div variants={fadeUp}>
-              <VideoSlot className={styles.videoItem} style={{ rotate: "-6deg" }} label="Видео 1" />
+              <VideoSlot className={styles.videoItem} videoSrc="/videos/thokkathotakura-thot.gif" label="Видео 1" />
             </motion.div>
             <motion.div variants={fadeUp}>
-              <VideoSlot className={styles.videoItem} style={{ rotate: "5deg" }} label="Видео 2" />
+              <VideoSlot className={styles.videoItem} videoSrc="/videos/ouch-chilling.gif" label="Видео 2" />
             </motion.div>
           </motion.div>
 
@@ -104,8 +104,9 @@ export function ForWhom() {
           >
             {forWhom.cards.map((card) => (
               <motion.div key={card.label} className={styles.targetCard} variants={fadeRight}>
-                <span className={styles.targetNum}>{card.num}</span>
+                
                 <h3 className={styles.targetLabel}>
+                  <span className={styles.targetNum}>{card.num}</span>
                   {card.label} <ArrowIcon />
                 </h3>
                 <p className={styles.targetText}>{card.text}</p>

@@ -8,6 +8,11 @@ import styles from "./SkillCarousel.module.scss";
 
 const TOTAL = 3;
 const ROTATIONS = [-6, 5, -4];
+const VIDEO_SOURCES = [
+  "/videos/huh-cat-huh-m4rtin_1.gif",
+  "/videos/cat-water.gif",
+  "/images/kiten.jpeg",
+];
 
 export function SkillCarousel() {
   const [current, setCurrent] = useState(0);
@@ -89,6 +94,7 @@ export function SkillCarousel() {
                 {/* Видео-блок под наклоном, справа */}
                 <VideoSlot
                   className={styles.videoSlot}
+                  videoSrc={VIDEO_SOURCES[i] || VIDEO_SOURCES[0]}
                   style={{ rotate: `${ROTATIONS[i]}deg` }}
                   label={slide.question}
                 />

@@ -5,13 +5,13 @@ import { siteContent } from "@/data/content";
 import { Container } from "@/shared/Container/Container";
 import styles from "./Blessed.module.scss";
 
-// На сколько px блок «GOD BLESS DAVE» опущен вниз в старте — чем больше, тем заметнее «выезд»
 const RISE_OFFSET = 240;
 
 export function Blessed() {
   const { blessed } = siteContent;
   const stageRef = useRef<HTMLDivElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
+  const blessImgRef = useRef<HTMLDivElement>(null);
 
   const update = useCallback(() => {
     const stage = stageRef.current;
@@ -19,17 +19,19 @@ export function Blessed() {
     if (!stage || !bottom) return;
 
     const vh = window.innerHeight;
-    // Якорь — нижняя кромка сцены (там и живёт GOD BLESS). transform не двигает layout,
-    // поэтому замер стабилен и не уходит в самоподдув.
-    const anchor = stage.getBoundingClientRect().bottom;
-
-    // 0 — блок только входит снизу экрана; 1 — уже на месте.
-    // Делитель 0.45vh → доезжает быстро, ещё до центра экрана («быстрое пролистывание»).
-    const raw = (vh - anchor) / (vh * 0.45);
+    const anchor = stage.getBoundingClientRect().top;
+    // raw=0 когда верх сцены на 85% вьюпорта (только показался), raw=1 когда на 15%
+    const raw = (vh * 0.85 - anchor) / (vh * 0.7);
     const p = Math.min(1, Math.max(0, raw));
-    const eased = 1 - Math.pow(1 - p, 2); // ease-out: резкий старт, мягкая посадка
+    const eased = 1 - Math.pow(1 - p, 2);
 
     bottom.style.transform = `translateY(${(1 - eased) * RISE_OFFSET}px)`;
+
+    if (blessImgRef.current) {
+      const offset = (1 - eased) * 110;
+      blessImgRef.current.style.transform = `translateX(-50%) translateY(${offset}px)`;
+      blessImgRef.current.style.opacity = String(eased);
+    }
   }, []);
 
   useEffect(() => {
@@ -62,11 +64,11 @@ export function Blessed() {
         */}
         <div className={styles.photoBg} aria-hidden="true" />
 
-        {/*
-          Плейсхолдер 2 — Dave по центру (PNG без фона)
-          Заменить на <Image>, встанет ровно
-        */}
-        <div className={styles.photoPerson} aria-hidden="true" />
+        {/* Фоновое фото (флаг + Дейв) — скейл-параллакс при скролле */}
+        <div className={styles.blessImgWrap} ref={blessImgRef} aria-hidden="true">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/images/bless.webp" alt="" className={styles.blessImg} />
+        </div>
 
         {/*
           Плейсхолдер 3 — облачко с цитатой (PNG)
