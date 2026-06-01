@@ -1,10 +1,12 @@
+"use client";
+
+import { motion } from "framer-motion";
 import { siteContent } from "@/data/content";
 import { Container } from "@/shared/Container/Container";
 import { Section } from "@/shared/Section/Section";
 import { VideoSlot } from "@/shared/VideoSlot/VideoSlot";
 import styles from "./ForWhom.module.scss";
 
-// Иконка стрелки для карточек аудитории
 function ArrowIcon() {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -13,16 +15,22 @@ function ArrowIcon() {
   );
 }
 
-// Видео-блок (аналог videoInline из Hero, но крупнее и под углом)
-function VideoPlaceholder({ label, rotate }: { label: string; rotate: number }) {
-  return (
-    <VideoSlot
-      className={styles.videoItem}
-      style={{ rotate: `${rotate}deg` }}
-      label={label}
-    />
-  );
-}
+const fadeUp = {
+  hidden: { opacity: 0, y: 28 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
+};
+const fadeLeft = {
+  hidden: { opacity: 0, x: -44 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.54, ease: "easeOut" as const } },
+};
+const fadeRight = {
+  hidden: { opacity: 0, x: 44 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.54, ease: "easeOut" as const } },
+};
+const stagger = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.11 } },
+};
 
 export function ForWhom() {
   const { forWhom } = siteContent;
@@ -30,59 +38,80 @@ export function ForWhom() {
   return (
     <Section id="for-whom" className={styles.section} ariaLabel="Для кого этот курс">
       <Container>
-        {/* Декоративные точки */}
         <div className={styles.dots} aria-hidden="true">
           <span /><span /><span />
         </div>
 
-        {/* Заголовок */}
-        <h2 className={styles.heading}>
+        <motion.h2
+          className={styles.heading}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+          variants={fadeUp}
+        >
           {forWhom.heading}{" "}
           <em className={styles.headingAccent}>{forWhom.headingAccent}</em>
-        </h2>
+        </motion.h2>
 
-        {/* Основная сетка */}
         <div className={styles.body}>
-
-          {/* ─── Левая зона: Dave-карточка ─── */}
-          <div className={styles.daveCard}>
+          {/* Dave-карточка — въезжает слева */}
+          <motion.div
+            className={styles.daveCard}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
+            variants={fadeLeft}
+          >
             <div className={styles.daveHeader}>
-              {/* Квадратный плейсхолдер для фото — заменить на <Image> */}
               <div className={styles.avatar} aria-label="Фото Dave" />
               <div className={styles.daveMeta}>
                 <strong className={styles.daveName}>{forWhom.dave.name}</strong>
                 <span className={styles.daveRole}>{forWhom.dave.role}</span>
               </div>
             </div>
-
             <p className={styles.daveText}>{forWhom.dave.para1}</p>
             <p className={styles.daveText}>
               {forWhom.dave.para2}{" "}
               <strong className={styles.daveAccent}>{forWhom.dave.accent}</strong>
             </p>
-
             <p className={styles.daveQuote}>{forWhom.dave.quote}</p>
-          </div>
+          </motion.div>
 
-          {/* ─── Центральная зона: 2 видео-заглушки ─── */}
-          <div className={styles.videos} aria-label="Видео-материалы — позже">
-            <VideoPlaceholder label="Видео 1" rotate={-6} />
-            <VideoPlaceholder label="Видео 2" rotate={5} />
-          </div>
+          {/* Видео — появляются снизу */}
+          <motion.div
+            className={styles.videos}
+            aria-label="Видео-материалы"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
+            variants={stagger}
+          >
+            <motion.div variants={fadeUp}>
+              <VideoSlot className={styles.videoItem} style={{ rotate: "-6deg" }} label="Видео 1" />
+            </motion.div>
+            <motion.div variants={fadeUp}>
+              <VideoSlot className={styles.videoItem} style={{ rotate: "5deg" }} label="Видео 2" />
+            </motion.div>
+          </motion.div>
 
-          {/* ─── Правая зона: карточки аудитории ─── */}
-          <div className={styles.cards}>
+          {/* Карточки аудитории — въезжают справа */}
+          <motion.div
+            className={styles.cards}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
+            variants={stagger}
+          >
             {forWhom.cards.map((card) => (
-              <div key={card.label} className={styles.targetCard}>
+              <motion.div key={card.label} className={styles.targetCard} variants={fadeRight}>
                 <span className={styles.targetNum}>{card.num}</span>
                 <h3 className={styles.targetLabel}>
                   {card.label} <ArrowIcon />
                 </h3>
                 <p className={styles.targetText}>{card.text}</p>
-              </div>
+              </motion.div>
             ))}
-          </div>
-
+          </motion.div>
         </div>
       </Container>
     </Section>

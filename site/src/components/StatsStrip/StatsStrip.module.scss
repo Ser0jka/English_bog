@@ -1,0 +1,76 @@
+@use "@/styles/variables" as *;
+
+.strip {
+  background: $color-dark-bg;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.inner {
+  max-width: $container-width;
+  margin-inline: auto;
+  padding-inline: 32px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: repeat(2, 1fr);
+    padding-inline: 16px;
+  }
+}
+
+.stat {
+  padding: 44px 24px;
+  text-align: center;
+  border-right: 1px solid rgba(255, 255, 255, 0.07);
+  transition: background 0.2s ease;
+
+  &:last-child {
+    border-right: none;
+  }
+
+  @media (max-width: $breakpoint-md) {
+    padding: 32px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+
+    &:nth-child(2) {
+      border-right: none;
+    }
+
+    &:nth-child(3) {
+      border-right: 1px solid rgba(255, 255, 255, 0.07);
+      border-bottom: none;
+    }
+
+    &:last-child {
+      border-right: none;
+      border-bottom: none;
+    }
+  }
+}
+
+.statNum {
+  font-size: clamp(44px, 5.8vw, 88px);
+  font-weight: 950;
+  color: $color-dark-text;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-bottom: 10px;
+  font-family: $font-display;
+}
+
+.statVal {
+  display: inline;
+}
+
+.statSuffix {
+  color: $color-accent;
+  font-style: italic;
+}
+
+.statLabel {
+  font-size: clamp(12px, 1.1vw, 15px);
+  color: $color-dark-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+}

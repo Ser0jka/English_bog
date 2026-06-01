@@ -48,6 +48,11 @@
   background: $color-card;
   overflow: hidden;
   display: flex;
+  transition: box-shadow 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
+  }
 }
 
 // Красная карточка (блок 3)
@@ -244,6 +249,7 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
+  overflow: hidden;
   min-height: 62px;
   border-radius: 999px;
   padding: 18px 52px;

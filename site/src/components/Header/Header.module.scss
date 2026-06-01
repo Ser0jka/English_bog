@@ -16,7 +16,7 @@ $bp-menu: 900px;
 
 .inner {
   display: flex;
-  min-height: 56px;
+  min-height: 72px;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
@@ -30,7 +30,7 @@ $bp-menu: 900px;
   flex-shrink: 0;
   font-family: $font-display;
   color: $color-text;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 900;
   line-height: 1;
   letter-spacing: -0.02em;
@@ -59,8 +59,8 @@ $bp-menu: 900px;
 .nav {
   display: flex;
   align-items: center;
-  gap: 30px;
-  font-size: 16px;
+  gap: 34px;
+  font-size: 17px;
   font-weight: 600;
   color: $color-text;
 
@@ -103,49 +103,28 @@ $bp-menu: 900px;
 // ── Бургер ───────────────────────────────────────────────
 .menuButton {
   display: none;
-  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  align-items: flex-start;
-  gap: 6px;
   width: 36px;
   height: 36px;
   flex-shrink: 0;
   border: 0;
   background: transparent;
-  padding: 4px 2px;
+  padding: 0;
   cursor: pointer;
+  color: $color-text;
 
-  span {
-    display: block;
-    height: 2.5px;
-    border-radius: 999px;
-    background: $color-text;
-    transition: width $transition;
-  }
-
-  span:first-child { width: 24px; }
-  span:last-child  { width: 16px; }
-
-  &:hover span:last-child { width: 24px; }
   &:focus-visible { @include focus-ring; }
 }
 
-// ── Backdrop ─────────────────────────────────────────────
+// ── Backdrop (Framer Motion) ─────────────────────────────
 .backdrop {
-  pointer-events: none;
   position: fixed;
   inset: 0;
   z-index: 35;
-  background: transparent;
-  transition: background 0.3s ease;
 }
 
-.backdropOpen {
-  pointer-events: auto;
-  background: rgba(0, 0, 0, 0.72);
-}
-
-// ── Мобильное меню ───────────────────────────────────────
+// ── Мобильное меню (Framer Motion) ───────────────────────
 .mobileMenu {
   position: fixed;
   inset-block: 0;
@@ -158,13 +137,7 @@ $bp-menu: 900px;
   padding: 60px 32px 48px;
   background: #070707;
   color: #ffffff;
-  transform: translateX(102%);
-  transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
   overflow-y: auto;
-}
-
-.mobileMenuOpen {
-  transform: translateX(0);
 }
 
 .closeButton {
@@ -189,17 +162,6 @@ $bp-menu: 900px;
     @include focus-ring;
     outline-color: rgba(255, 255, 255, 0.6);
   }
-
-  span {
-    position: absolute;
-    width: 20px;
-    height: 2px;
-    border-radius: 999px;
-    background: currentColor;
-  }
-
-  span:first-child { transform: rotate(45deg); }
-  span:last-child  { transform: rotate(-45deg); }
 }
 
 .mobileNav {
@@ -262,6 +224,10 @@ $bp-menu: 900px;
 
 // Главный брейкпоинт хедера — 900px
 @media (max-width: $bp-menu) {
+  .inner {
+    min-height: 56px;
+  }
+
   .nav,
   .cta {
     display: none;

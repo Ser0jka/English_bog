@@ -79,14 +79,22 @@ export function BigCta() {
         <line x1="655" y1="145" x2="145" y2="655" stroke="rgba(255,255,255,0.02)"  strokeWidth="1" />
       </svg>
 
-      {/* Video placeholder — left */}
+      {/* Video — left */}
       <div className={`${styles.videoCard} ${styles.videoLeft}`} aria-hidden="true">
-        <span className={styles.play} />
+        <img
+          src="/videos/american-psycho-nodd.gif"
+          alt=""
+          className={styles.videoMedia}
+        />
       </div>
 
-      {/* Video placeholder — right */}
+      {/* Video — right */}
       <div className={`${styles.videoCard} ${styles.videoRight}`} aria-hidden="true">
-        <span className={styles.play} />
+        <img
+          src="/videos/american-psycho-nodd.gif"
+          alt=""
+          className={styles.videoMedia}
+        />
       </div>
 
       <Container>
@@ -108,7 +116,6 @@ export function BigCta() {
               className={styles.cta}
               target="_blank"
               rel="noopener noreferrer"
-              style={{ display: "block" }} // Чтобы кнопка заполняла обертку
             >
               {bigCta.cta} →
             </a>

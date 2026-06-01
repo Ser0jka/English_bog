@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X } from "lucide-react";
 import { links } from "@/data/links";
 import { siteContent } from "@/data/content";
 import { Container } from "@/shared/Container/Container";
@@ -12,7 +14,6 @@ export function Header() {
   const openMenu  = () => setIsMenuOpen(true);
   const closeMenu = () => setIsMenuOpen(false);
 
-  // Блокируем прокрутку страницы
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
@@ -20,7 +21,6 @@ export function Header() {
 
   return (
     <>
-      {/* ── Шапка ─────────────────────────────── */}
       <header className={styles.header}>
         <Container className={styles.inner}>
           <a className={styles.logo} href="#top" aria-label="Dave Englishbad — на главную">
@@ -29,9 +29,7 @@ export function Header() {
 
           <nav className={styles.nav} aria-label="Основная навигация">
             {siteContent.nav.map((item) => (
-              <a key={item.href} href={item.href}>
-                {item.label}
-              </a>
+              <a key={item.href} href={item.href}>{item.label}</a>
             ))}
           </nav>
 
@@ -46,46 +44,57 @@ export function Header() {
             aria-expanded={isMenuOpen}
             onClick={openMenu}
           >
-            <span />
-            <span />
+            <Menu size={22} />
           </button>
         </Container>
       </header>
 
-      {/* ── Backdrop и меню — вне <header>, чтобы избежать stacking-context от backdrop-filter ── */}
-      <div
-        className={`${styles.backdrop} ${isMenuOpen ? styles.backdropOpen : ""}`}
-        onClick={closeMenu}
-        aria-hidden="true"
-      />
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            className={styles.backdrop}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.22 }}
+            onClick={closeMenu}
+            aria-hidden="true"
+            style={{ background: "rgba(0,0,0,0.72)", pointerEvents: "auto" }}
+          />
+        )}
+      </AnimatePresence>
 
-      <aside
-        className={`${styles.mobileMenu} ${isMenuOpen ? styles.mobileMenuOpen : ""}`}
-        aria-hidden={!isMenuOpen}
-        aria-label="Мобильное меню"
-      >
-        <button
-          className={styles.closeButton}
-          type="button"
-          aria-label="Закрыть меню"
-          onClick={closeMenu}
-        >
-          <span />
-          <span />
-        </button>
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.aside
+            className={styles.mobileMenu}
+            initial={{ x: "102%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "102%" }}
+            transition={{ duration: 0.32, ease: "easeInOut" as const }}
+            aria-label="Мобильное меню"
+          >
+            <button
+              className={styles.closeButton}
+              type="button"
+              aria-label="Закрыть меню"
+              onClick={closeMenu}
+            >
+              <X size={20} />
+            </button>
 
-        <nav className={styles.mobileNav} aria-label="Мобильная навигация">
-          {siteContent.nav.map((item) => (
-            <a key={item.href} href={item.href} onClick={closeMenu}>
-              {item.label}
+            <nav className={styles.mobileNav} aria-label="Мобильная навигация">
+              {siteContent.nav.map((item) => (
+                <a key={item.href} href={item.href} onClick={closeMenu}>{item.label}</a>
+              ))}
+            </nav>
+
+            <a className={styles.mobileCta} href={links.telegramBotLead} onClick={closeMenu}>
+              Участвовать <span aria-hidden="true">→</span>
             </a>
-          ))}
-        </nav>
-
-        <a className={styles.mobileCta} href={links.telegramBotLead} onClick={closeMenu}>
-          Участвовать <span aria-hidden="true">→</span>
-        </a>
-      </aside>
+          </motion.aside>
+        )}
+      </AnimatePresence>
     </>
   );
 }

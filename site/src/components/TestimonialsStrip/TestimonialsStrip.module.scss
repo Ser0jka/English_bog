@@ -1,0 +1,59 @@
+@use "@/styles/variables" as *;
+
+.strip {
+  overflow: hidden;
+  padding-block: 40px;
+  background: $color-bg;
+  border-block: 1px solid $color-border;
+}
+
+.track {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  animation: testimonialScroll 38s linear infinite;
+
+  &:hover {
+    animation-play-state: paused;
+  }
+}
+
+.card {
+  flex-shrink: 0;
+  width: 290px;
+  background: $color-card;
+  border-radius: $radius-md;
+  padding: 22px 26px;
+  border: 1px solid $color-border;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+}
+
+.stars {
+  color: #f5a623;
+  font-size: 14px;
+  letter-spacing: 3px;
+  margin-bottom: 10px;
+}
+
+.text {
+  font-size: 14px;
+  line-height: 1.6;
+  color: $color-text;
+  margin-bottom: 10px;
+  font-style: italic;
+}
+
+.author {
+  font-size: 13px;
+  font-weight: 700;
+  color: $color-accent;
+}
+
+@keyframes testimonialScroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
