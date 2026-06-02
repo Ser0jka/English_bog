@@ -25,9 +25,9 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "Dave Englishbad — практикум по американскому произношению",
+  title: "English Bog — практикум по американскому произношению",
   description:
-    "Поставь американское произношение и начни понимать носителей. Практикум из коротких видеоуроков от Dave Englishbad.",
+    "Поставь американское произношение и начни понимать носителей. Практикум из коротких видеоуроков от Dave English Bog.",
 };
 
 export default function RootLayout({

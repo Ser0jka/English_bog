@@ -307,8 +307,8 @@
 
 .socialIcon {
   display: inline-flex;
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
@@ -399,6 +399,7 @@
 
   .copy {
     padding-bottom: 32px;
+    padding-right: 0; // в однострочном layout правый паддинг не нужен
   }
 
   .personCol {
@@ -522,7 +523,7 @@
   }
 
   .teacherInfo {
-    padding-bottom: 24px;
+    padding-bottom: 36px; // тикер ~28px + воздух, чтобы контент не перекрывался
   }
 
   .scribble {
