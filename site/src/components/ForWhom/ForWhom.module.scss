@@ -327,9 +327,14 @@
     gap: 12px;
   }
 
+  // Два видео по 220px + 12px gap = 452px > ~448px контейнера → делаем адаптивные ширины
   .videoItem {
-    width: 220px;
-    height: 147px;
+    width: calc(50% - 6px);
+    height: auto;
+    aspect-ratio: 3 / 2;
+    box-shadow:
+      10px -10px 0px 0px #e0e0e0,
+      10px -5px 20px rgba(0, 0, 0, 0.2);
   }
 
   .targetLabel {
