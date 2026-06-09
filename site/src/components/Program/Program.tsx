@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Info } from "lucide-react";
 import { links } from "@/data/links";
 import { siteContent } from "@/data/content";
 import { Container } from "@/shared/Container/Container";
@@ -27,7 +26,7 @@ export function Program() {
   const { program } = siteContent;
 
   return (
-    <Section id="program" className={styles.section} ariaLabel="Программа практикума">
+    <Section id="program" className={styles.section} ariaLabel="Форматы занятий и цены">
       <Container>
         <motion.div
           className={styles.header}
@@ -70,19 +69,19 @@ export function Program() {
                 <ul className={styles.lessons}>
                   {block.lessons.map((lesson) => (
                     <li key={lesson.label} className={styles.lesson}>
+                      <span className={styles.lessonBullet} aria-hidden="true" />
                       <span className={styles.lessonLabel}>{lesson.label}</span>
-                      <span className={styles.lessonIcon} aria-hidden="true">
-                        <Info size={12} />
-                      </span>
-                      <div className={styles.tooltip} role="tooltip">
-                        {lesson.tooltip}
-                      </div>
+                      {(lesson as { tooltip?: string }).tooltip && (
+                        <div className={styles.tooltip} role="tooltip">
+                          {(lesson as { tooltip?: string }).tooltip}
+                        </div>
+                      )}
                     </li>
                   ))}
                 </ul>
 
                 <div className={styles.result}>
-                  <strong>Результат:</strong>
+                  <strong>{program.resultLabel}:</strong>
                   <span>{block.result}</span>
                 </div>
               </div>

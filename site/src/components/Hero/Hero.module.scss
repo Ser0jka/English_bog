@@ -285,18 +285,30 @@
 .teacherInfo {
   position: relative;
   z-index: 2;
-  padding-bottom: 68px; // запас под ticker (38px) + воздух
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  width: min(92%, 430px);
+  margin-inline: auto;
+  margin-bottom: 58px; // запас под ticker (38px) + воздух
+  padding: 14px 18px 16px;
   text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 18px;
+  background: rgba(12, 10, 10, 0.58);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
 
 .teacherName {
   font-family: $font-display;
-  font-size: clamp(32px, 2.8vw, 46px);
+  font-size: clamp(28px, 2.6vw, 42px);
   font-weight: 900;
   line-height: 1;
   letter-spacing: -0.02em;
-  text-shadow: 0 3px 0 rgba(0, 0, 0, 0.2);
-  margin-bottom: 14px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.55);
+  margin-bottom: 12px;
 }
 
 .socials {
@@ -415,11 +427,11 @@
 // ── 992 → 768px ───────────────────────────────────────────
 @media (max-width: $breakpoint-md) {
   .hero {
-    padding-bottom: 56px;
+    padding-bottom: 40px;
   }
 
   .teacherInfo {
-    padding-bottom: 60px;
+    margin-bottom: 50px;
   }
 
   .ticker {
@@ -489,13 +501,25 @@
 
 // ── 768 → 480px ───────────────────────────────────────────
 @media (max-width: $breakpoint-sm) {
+  .hero {
+    padding-bottom: 32px;
+  }
+
   .card {
-    padding-inline: 20px;
+    min-height: calc(100svh - 68px);
+    padding: 18px 20px 0;
+    border-radius: 20px;
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+
+  .copy {
+    padding-bottom: 10px;
   }
 
   // КРИТИЧНО: уменьшаем шрифт чтобы "НА АНГЛИЙСКОМ" влезло в одну строку
   .title {
-    font-size: clamp(26px, 8vw, 36px);
+    font-size: clamp(27px, 8.4vw, 36px);
+    line-height: 0.9;
   }
 
   // Снимаем запрет переноса как safety net (при данном font-size текст влезает)
@@ -518,35 +542,82 @@
     height: 28px;
   }
 
+  .badges {
+    gap: 5px;
+    margin-bottom: 12px;
+
+    li {
+      min-height: 22px;
+      font-size: 11px;
+      padding-inline: 9px;
+    }
+  }
+
+  .subtitle {
+    margin-top: 12px;
+    font-size: clamp(14px, 4.2vw, 17px);
+    line-height: 1.26;
+  }
+
+  .actions {
+    gap: 8px;
+    padding-top: 14px;
+  }
+
+  .primaryBtn,
+  .secondaryBtn {
+    min-height: 48px;
+    font-size: clamp(14px, 4vw, 16px);
+    padding-inline: 18px;
+  }
+
   .personCol {
-    min-height: 330px;
+    min-height: clamp(170px, 28svh, 250px);
   }
 
   .teacherInfo {
-    padding-bottom: 36px; // тикер ~28px + воздух, чтобы контент не перекрывался
+    width: min(94%, 360px);
+    margin-bottom: 14px;
+    padding: 10px 12px 12px;
+    border-radius: 14px;
   }
+
+  .teacherName {
+    font-size: clamp(24px, 7vw, 30px);
+    margin-bottom: 0;
+  }
+
 
   .scribble {
     left: 0;
     bottom: 40%;
     scale: 0.85;
   }
+
+  .photoSlot {
+    right: -12%;
+    width: 116%;
+    height: 108%;
+  }
 }
 
 // ── 480 → 360px ───────────────────────────────────────────
 @media (max-width: $breakpoint-xs) {
   .card {
-    padding-inline: 16px;
-    border-radius: 20px;
+    min-height: calc(100svh - 64px);
+    padding: 16px 16px 0;
+    border-radius: 18px;
   }
 
   .badges li {
+    min-height: 22px;
     font-size: 10.5px;
+    padding-inline: 8px;
   }
 
   // Шрифт достаточно мал чтобы "НА АНГЛИЙСКОМ" влезло в одну строку
   .title {
-    font-size: clamp(22px, 7.5vw, 28px);
+    font-size: clamp(23px, 7.8vw, 28px);
   }
 
   // Возвращаем nowrap — при данном font-size текст умещается
@@ -570,20 +641,84 @@
   }
 
   .subtitle {
-    font-size: 13.5px;
+    margin-top: 10px;
+    font-size: 12.5px;
+    line-height: 1.25;
   }
 
   .primaryBtn,
   .secondaryBtn {
-    min-height: 58px;
-    font-size: 15px;
+    min-height: 48px;
+    font-size: 14px;
   }
 
   .personCol {
-    min-height: 340px;
+    min-height: clamp(160px, 27svh, 220px);
   }
 
   .teacherName {
     font-size: 26px;
+  }
+}
+
+@media (max-width: $breakpoint-sm) and (max-height: 700px) {
+  .hero {
+    padding-bottom: 24px;
+  }
+
+  .card {
+    min-height: calc(100svh - 62px);
+    padding-top: 12px;
+  }
+
+  .badges {
+    margin-bottom: 8px;
+
+    li {
+      min-height: 20px;
+      font-size: 10px;
+      padding-inline: 7px;
+    }
+  }
+
+  .title {
+    font-size: clamp(22px, 7.2vw, 28px);
+  }
+
+  .subtitle {
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 1.2;
+  }
+
+  .actions {
+    gap: 6px;
+    padding-top: 10px;
+  }
+
+  .primaryBtn,
+  .secondaryBtn {
+    min-height: 42px;
+    padding: 11px 14px;
+    font-size: 13px;
+  }
+
+  .personCol {
+    min-height: clamp(130px, 22svh, 170px);
+  }
+
+  .teacherInfo {
+    margin-bottom: 10px;
+    padding: 8px 10px 10px;
+  }
+
+  .teacherName {
+    font-size: 22px;
+  }
+
+  .photoSlot {
+    right: -8%;
+    width: 108%;
+    height: 102%;
   }
 }

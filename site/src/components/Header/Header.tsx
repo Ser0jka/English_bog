@@ -34,7 +34,7 @@ export function Header() {
           </nav>
 
           <a className={styles.cta} href={links.telegramBotLead}>
-            Участвовать <span aria-hidden="true">→</span>
+            Записаться <span aria-hidden="true">→</span>
           </a>
 
           <button
@@ -90,7 +90,7 @@ export function Header() {
             </nav>
 
             <a className={styles.mobileCta} href={links.telegramBotLead} onClick={closeMenu}>
-              Участвовать <span aria-hidden="true">→</span>
+              Записаться <span aria-hidden="true">→</span>
             </a>
           </motion.aside>
         )}

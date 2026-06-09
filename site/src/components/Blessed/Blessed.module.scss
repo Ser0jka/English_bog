@@ -3,6 +3,8 @@
 
 // ── Секция ────────────────────────────────────────────────
 .section {
+  border-bottom-right-radius: 90px;
+  border-bottom-left-radius: 90px;
   background: $color-dark-bg;
   color: $color-dark-text;
   padding-top: 80px;

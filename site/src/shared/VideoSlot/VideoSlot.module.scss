@@ -5,6 +5,13 @@
   overflow: hidden;
 }
 
+.slot[class*="Hero_videoInline"] {
+  display: inline-flex !important;
+  width: clamp(110px, 12vw, 178px);
+  height: clamp(48px, 5vw, 72px);
+  flex: 0 0 auto;
+}
+
 // Медиа заполняет слот целиком, сохраняя пропорции
 .media {
   position: absolute;
@@ -20,4 +27,18 @@
 // Лёгкий зум при наведении — оживляет карточки
 .slot:hover .media {
   transform: scale(1.07);
+}
+
+@media (max-width: 480px) {
+  .slot[class*="Hero_videoInline"] {
+    width: 86px;
+    height: 38px;
+  }
+}
+
+@media (max-width: 360px) {
+  .slot[class*="Hero_videoInline"] {
+    width: 72px;
+    height: 32px;
+  }
 }

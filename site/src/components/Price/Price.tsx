@@ -41,7 +41,7 @@ function Countdown() {
 
   return (
     <div className={styles.countdown}>
-      <p className={styles.countdownLabel}>⏰ До старта курса осталось:</p>
+      <p className={styles.countdownLabel}>⏰ До ближайшего набора осталось:</p>
       <div className={styles.countdownTimer}>
         {units.map(({ v, l }, i) => (
           <div key={l} className={styles.countdownUnit}>
@@ -68,7 +68,7 @@ export function Price() {
   const { price } = siteContent;
 
   return (
-    <section id="price" className={styles.section} aria-label="Стоимость обучения">
+    <section id="price" className={styles.section} aria-label="Форматы занятий">
       <Container>
         <motion.div
           className={styles.heading}

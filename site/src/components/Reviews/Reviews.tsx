@@ -65,7 +65,7 @@ export function Reviews() {
           <span className={styles.ratingStars} aria-hidden="true">★★★★★</span>
           <span className={styles.ratingScore}>4.9</span>
           <span className={styles.ratingSep} aria-hidden="true" />
-          <span className={styles.ratingCount}>500+ довольных учеников</span>
+          <span className={styles.ratingCount}>50+ довольных учеников</span>
         </motion.div>
 
         <div className={styles.header}>

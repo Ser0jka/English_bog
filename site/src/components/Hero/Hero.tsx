@@ -43,12 +43,12 @@ const socials = [
 ];
 
 const TICKER_ITEMS = [
-  "АМЕРИКАНСКОЕ ПРОИЗНОШЕНИЕ",
-  "УВЕРЕННАЯ РЕЧЬ",
-  "ЛЕТНИЙ НАБОР",
-  "С НУЛЯ ДО НОСИТЕЛЯ",
-  "ПОСТАВЬ АКЦЕНТ",
-  "НАЧНИ ПОНИМАТЬ НОСИТЕЛЕЙ",
+  "АНГЛИЙСКИЙ ДЕТЯМ И ВЗРОСЛЫМ",
+  "ИНДИВИДУАЛЬНО И В МИНИ-ГРУППЕ",
+  "ПЕРВЫЙ УРОК БЕСПЛАТНО",
+  "ОГЭ И ЕГЭ",
+  "РАЗГОВОРНАЯ ПРАКТИКА",
+  "АНГЛИЙСКИЙ ДЛЯ ПУТЕШЕСТВИЙ",
   "ИВАН БОГОМОЛОВ",
 ];
 
@@ -99,7 +99,7 @@ export function Hero() {
           <HeroScene />
 
           <motion.div className={styles.copy} variants={stagger}>
-            <motion.ul className={styles.badges} aria-label="Детали курса" variants={fadeUp}>
+            <motion.ul className={styles.badges} aria-label="Детали занятий" variants={fadeUp}>
               {hero.badges.map((badge) => <li key={badge}>{badge}</li>)}
             </motion.ul>
 
@@ -125,7 +125,7 @@ export function Hero() {
               </motion.a>
               <motion.a
                 className={styles.secondaryBtn}
-                href={links.telegramBotTest}
+                href="#program"
                 whileHover={{ scale: 1.04, y: -3 }}
                 whileTap={{ scale: 0.97 }}
               >
