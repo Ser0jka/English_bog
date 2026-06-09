@@ -5,7 +5,6 @@ import { ForWhom } from "@/components/ForWhom/ForWhom";
 import { Blessed } from "@/components/Blessed/Blessed";
 import { Program } from "@/components/Program/Program";
 import { SkillCarousel } from "@/components/SkillCarousel/SkillCarousel";
-import { Price } from "@/components/Price/Price";
 import { BigCta } from "@/components/BigCta/BigCta";
 import { TestimonialsStrip } from "@/components/TestimonialsStrip/TestimonialsStrip";
 import { Reviews } from "@/components/Reviews/Reviews";
@@ -26,20 +25,17 @@ export default function Home() {
         {/* 2. Для кого */}
         <ForWhom />
 
-
-        
-
-        {/* 5. Карусель */}
+        {/* 3. Карусель */}
         <SkillCarousel />
 
-        {/* 3. God Bless Dave */}
+        {/* 4. Направления */}
         <Blessed />
 
-        {/* 6. Стоимость */}
-        <Price />
-
-        {/* 4. Программа */}
+        {/* 5. Форматы и цены */}
         <Program />
+
+        {/* 6. FAQ */}
+        <Faq />
 
         {/* 7. Большой CTA */}
         <BigCta />
@@ -50,8 +46,6 @@ export default function Home() {
         {/* 8. Отзывы */}
         <Reviews />
 
-        {/* 9. FAQ */}
-        <Faq />
       </main>
       <Footer />
     </>

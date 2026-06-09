@@ -2,51 +2,42 @@
 
 .strip {
   overflow: hidden;
-  padding-block: 40px;
+  padding-block: 48px;
   background: $color-bg;
   border-block: 1px solid $color-border;
 }
 
 .track {
   display: flex;
-  gap: 20px;
   width: max-content;
-  animation: testimonialScroll 38s linear infinite;
+  animation: testimonialScroll 34s linear infinite;
+  will-change: transform;
 
   &:hover {
     animation-play-state: paused;
   }
 }
 
+.group {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding-inline: 9px;
+}
+
 .card {
   flex-shrink: 0;
-  width: 290px;
-  background: $color-card;
-  border-radius: $radius-md;
-  padding: 22px 26px;
-  border: 1px solid $color-border;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  line-height: 0;
+  border-radius: $radius-sm;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
 }
 
-.stars {
-  color: #f5a623;
-  font-size: 14px;
-  letter-spacing: 3px;
-  margin-bottom: 10px;
-}
-
-.text {
-  font-size: 14px;
-  line-height: 1.6;
-  color: $color-text;
-  margin-bottom: 10px;
-  font-style: italic;
-}
-
-.author {
-  font-size: 13px;
-  font-weight: 700;
-  color: $color-accent;
+.image {
+  display: block;
+  width: auto;
+  height: clamp(260px, 34vw, 460px);
+  max-width: none;
 }
 
 @keyframes testimonialScroll {
@@ -55,5 +46,29 @@
   }
   to {
     transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 768px) {
+  .strip {
+    display: flex;
+    justify-content: center;
+    padding-block: 36px;
+  }
+
+  .track {
+    flex-shrink: 0;
+    animation-duration: 28s;
+  }
+
+  .group {
+    gap: 14px;
+    padding-inline: 7px;
+  }
+
+  .image {
+    height: clamp(230px, 62vw, 340px);
+    max-width: 86vw;
+    object-fit: contain;
   }
 }

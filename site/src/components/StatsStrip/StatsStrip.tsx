@@ -8,8 +8,8 @@ import styles from "./StatsStrip.module.scss";
 const STATS = [
   { value: 50, suffix: "+", label: "учеников занимаются" },
   { value: 98, suffix: "%", label: "довольны результатом" },
-  { value: 10, suffix: "+", label: "занимаюсь репетиторством" },
-  { value: 7, suffix: "+", label: "беру на обучение школьников" },
+  { value: 7, suffix: "+", label: "лет преподавания" },
+  { value: 4, suffix: "", label: "направления занятий" },
 ];
 
 function StatCounter({
@@ -58,7 +58,7 @@ function StatCounter({
 
 export function StatsStrip() {
   return (
-    <div className={styles.strip} aria-label="Статистика курса">
+    <div className={styles.strip} aria-label="Статистика занятий">
       <div className={styles.inner}>
         {STATS.map((s) => (
           <StatCounter key={s.label} value={s.value} suffix={s.suffix} label={s.label} />

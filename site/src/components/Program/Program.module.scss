@@ -36,7 +36,7 @@
 // ── Сетка карточек ────────────────────────────────────────
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
   align-items: start;
 }
@@ -125,7 +125,7 @@
 .lessons {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
   margin-block: 4px;
 }
 
@@ -144,9 +144,18 @@
   }
 }
 
+.lessonBullet {
+  display: inline-flex;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #eaeaea;
+  flex-shrink: 0;
+}
+
 .lessonLabel {
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 600;
   color: $color-text;
 }
 
@@ -287,11 +296,6 @@
     gap: 16px;
   }
 
-  // Третья карточка на всю ширину
-  .card:last-child {
-    grid-column: 1 / -1;
-  }
-
   .photoSlot {
     width: 200px;
   }
@@ -300,10 +304,6 @@
 @media (max-width: $breakpoint-md) {
   .grid {
     grid-template-columns: 1fr;
-  }
-
-  .card:last-child {
-    grid-column: auto;
   }
 
   .photoSlot {

@@ -36,7 +36,7 @@ export function ForWhom() {
   const { forWhom } = siteContent;
 
   return (
-    <Section id="for-whom" className={styles.section} ariaLabel="Для кого этот курс">
+    <Section id="for-whom" className={styles.section} ariaLabel="Для кого занятия">
       <Container>
         <div className={styles.dots} aria-hidden="true">
           <span /><span /><span />

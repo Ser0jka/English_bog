@@ -29,8 +29,7 @@ export function Faq() {
             <em>{faq.heading}</em>
           </h2>
           <p className={styles.subtitle}>
-            Уверен, что{" "}
-            <em className={styles.subtitleAccent}>читаешь правильно?</em>
+            <em className={styles.subtitleAccent}>{faq.subtitle}</em>
           </p>
         </motion.div>
 

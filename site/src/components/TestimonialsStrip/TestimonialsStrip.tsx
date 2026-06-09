@@ -1,28 +1,56 @@
 "use client";
 
+import Image from "next/image";
 import styles from "./TestimonialsStrip.module.scss";
 
-const QUOTES = [
-  { text: "Меня перестали переспрашивать уже через две недели", author: "Тигран К." },
-  { text: "Наконец поняла, почему носители говорят так быстро", author: "Анастасия Р." },
-  { text: "Американские коллеги думали, что я жил в США раньше", author: "Михаил Д." },
-  { text: "Просто повторяешь — через неделю слышишь разницу сам", author: "Ольга В." },
-  { text: "Три урока — и акцент встал на место. Магия", author: "Артём Н." },
-  { text: "За месяц прошла курс дважды. Столько полезного", author: "Дарья С." },
+const REVIEWS = [
+  {
+    src: "/reviews/photo_1_2026-06-09_08-57-00.jpg",
+    alt: "Отзыв ученика English Bog 1",
+  },
+  {
+    src: "/reviews/photo_2_2026-06-09_08-57-00.jpg",
+    alt: "Отзыв ученика English Bog 2",
+  },
+  {
+    src: "/reviews/photo_3_2026-06-09_08-57-00.jpg",
+    alt: "Отзыв ученика English Bog 3",
+  },
+  {
+    src: "/reviews/photo_4_2026-06-09_08-57-00.jpg",
+    alt: "Отзыв ученика English Bog 4",
+  },
+  {
+    src: "/reviews/photo_5_2026-06-09_08-57-00.jpg",
+    alt: "Отзыв ученика English Bog 5",
+  },
+  {
+    src: "/reviews/photo_6_2026-06-09_08-57-00.jpg",
+    alt: "Отзыв ученика English Bog 6",
+  },
 ];
 
 export function TestimonialsStrip() {
   return (
-    <div className={styles.strip} aria-label="Отзывы учеников">
+    <section className={styles.strip} aria-label="Отзывы учеников в скриншотах" >
       <div className={styles.track}>
-        {[...QUOTES, ...QUOTES].map((q, i) => (
-          <article key={i} className={styles.card}>
-            <p className={styles.stars} aria-hidden="true">★★★★★</p>
-            <p className={styles.text}>"{q.text}"</p>
-            <p className={styles.author}>— {q.author}</p>
-          </article>
+        {[0, 1].map((group) => (
+          <div key={group} className={styles.group} aria-hidden={group === 1}>
+            {REVIEWS.map((review) => (
+              <article key={`${review.src}-${group}`} className={styles.card}>
+                <Image
+                  src={review.src}
+                  alt={group === 0 ? review.alt : ""}
+                  width={320}
+                  height={500}
+                  sizes="(max-width: 480px) 72vw, (max-width: 768px) 42vw, 320px"
+                  className={styles.image}
+                />
+              </article>
+            ))}
+          </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 }

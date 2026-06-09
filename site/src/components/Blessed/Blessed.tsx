@@ -45,7 +45,7 @@ export function Blessed() {
   }, [update]);
 
   return (
-    <section className={styles.section} aria-label="К счастью, у меня есть решение">
+    <section id="directions" className={styles.section} aria-label="Направления занятий">
       <Container className={styles.intro}>
         <h2 className={styles.heading}>
           {blessed.heading}{" "}

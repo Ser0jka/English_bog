@@ -6,6 +6,7 @@
   @include section-padding;
   background: $color-bg;
   scroll-margin-top: 56px; // высота sticky-шапки
+  overflow: hidden;
 }
 
 // ── Декоративные точки ────────────────────────────────────
@@ -205,7 +206,7 @@
 .targetLabel {
   display: flex;
   align-items: center;
-  justify-content: start !important;
+  justify-content: flex-start !important;
   gap: 7px;
   font-size: 28px;
   font-weight: 900;
@@ -321,6 +322,13 @@
 @media (max-width: $breakpoint-sm) {
   .section {
     padding-block: 64px;
+  }
+
+  .daveCard,
+  .targetCard,
+  .targetLabel,
+  .targetText {
+    max-width: 100%;
   }
 
   .videos {

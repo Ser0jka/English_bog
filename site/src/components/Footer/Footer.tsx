@@ -72,8 +72,8 @@ export function Footer() {
             {/* Колонка 1: Логотип + соцсети */}
             <div className={styles.brand}>
               <a href="#top" className={styles.logo} aria-label="Dave Englishbad — наверх">
-                <span>Dave&nbsp;&nbsp;US</span>
-                <span>Englishbad</span>
+                <span>Ivan&nbsp;&nbsp;US</span>
+                <span>Bogomolov</span>
               </a>
               <div className={styles.socials} aria-label="Социальные сети">
                 {socials.map((s) => (
@@ -102,20 +102,20 @@ export function Footer() {
 
             {/* Колонка 3: Тех. поддержка */}
             <div className={styles.col}>
-              <p className={styles.colTitle}>Тех. поддержка</p>
+              <p className={styles.colTitle}>Email</p>
               <a href={`mailto:${footer.supportEmail}`} className={styles.email}>
                 {footer.supportEmail}
               </a>
             </div>
 
-            {/* Колонка 4: Реквизиты */}
+            {/* Колонка 4: Реквизиты
             <div className={styles.col}>
               <p className={styles.legalName}>{footer.legal.name}</p>
               <p className={styles.legalText}>{footer.legal.inn}</p>
               <p className={styles.legalText}>{footer.legal.account}</p>
               <p className={styles.legalText}>{footer.legal.bank}</p>
               <p className={styles.legalText}>{footer.legal.bik}</p>
-            </div>
+            </div> */}
           </div>
         </div>
       </Container>
