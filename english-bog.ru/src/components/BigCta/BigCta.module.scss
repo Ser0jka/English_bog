@@ -25,6 +25,7 @@
 // ── Video card (shared) ────────────────────────────────────
 .videoCard {
   position: absolute;
+  display: block;
   top: 50%;
   width: clamp(200px, 22vw, 320px);
   aspect-ratio: 16 / 10;

@@ -9,7 +9,7 @@ export const siteContent = {
       "Для тех кто хотел начать, но постоянно откладыввл на потом. Без зубрежчки, стресса и страха ошибиться.",
     primaryCta: "Записаться на урок",
     secondaryCta: "Форматы",
-    videoPlaceholder: "/videos/american-psycho-nodd.gif",
+    videoPlaceholder: "Анимированное видео",
     personPlaceholder: "Фото преподавателя",
     teacherName: "Иван Богомолов",
   },
@@ -212,7 +212,7 @@ export const siteContent = {
       { label: "Направления", href: "#program", accent: true },
       { label: "Отзывы", href: "#reviews", accent: false },
     ],
-    supportEmail: "info@englishbad.shop",
+    supportEmail: "bogomolov.english@gmail.com",
     legal: {
       name: "ИП Скороход Роман Григорьевич",
       inn: "ИНН: 772854734170",

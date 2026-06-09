@@ -9,8 +9,8 @@ import styles from "./SkillCarousel.module.scss";
 const TOTAL = 3;
 const ROTATIONS = [-6, 5, -4];
 const VIDEO_SOURCES = [
-  "/videos/huh-cat-huh-m4rtin_1.gif",
-  "/videos/cat-water.gif",
+  "/videos/huh-cat-huh-m4rtin_1.mp4",
+  "/videos/cat-water.mp4",
   "/images/kiten.jpeg",
 ];
 

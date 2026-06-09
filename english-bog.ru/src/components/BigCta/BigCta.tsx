@@ -4,6 +4,7 @@ import { useRef, useEffect } from "react";
 import { siteContent } from "@/data/content";
 import { links } from "@/data/links";
 import { Container } from "@/shared/Container/Container";
+import { VideoSlot } from "@/shared/VideoSlot/VideoSlot";
 import styles from "./BigCta.module.scss";
 
 export function BigCta() {
@@ -80,22 +81,18 @@ export function BigCta() {
       </svg>
 
       {/* Video — left */}
-      <div className={`${styles.videoCard} ${styles.videoLeft}`} aria-hidden="true">
-        <img
-          src="/videos/kung-fu-panda.gif"
-          alt=""
-          className={styles.videoMedia}
-        />
-      </div>
+      <VideoSlot
+        className={`${styles.videoCard} ${styles.videoLeft}`}
+        videoSrc="/videos/kung-fu-panda.mp4"
+        ariaHidden
+      />
 
       {/* Video — right */}
-      <div className={`${styles.videoCard} ${styles.videoRight}`} aria-hidden="true">
-        <img
-          src="/videos/showing-my-powers-po.gif"
-          alt=""
-          className={styles.videoMedia}
-        />
-      </div>
+      <VideoSlot
+        className={`${styles.videoCard} ${styles.videoRight}`}
+        videoSrc="/videos/showing-my-powers-po.mp4"
+        ariaHidden
+      />
 
       <Container>
         <div className={styles.content}>
