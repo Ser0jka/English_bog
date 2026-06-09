@@ -50,14 +50,21 @@ export function Program() {
           variants={stagger}
         >
           {program.blocks.map((block) => (
-            <motion.div
+            <motion.a
               key={block.num}
+              href={links.telegramChannel}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`${block.title}: открыть телеграм-канал`}
               className={`${styles.card} ${block.accent ? styles.cardAccent : ""}`}
               variants={cardVariant}
               whileHover={{ y: -6, transition: { duration: 0.2 } }}
             >
               <div className={styles.cardContent}>
-                <span className={styles.blockNum}>{block.num}</span>
+                <div className={styles.cardMeta}>
+                  <span className={styles.blockNum}>{block.num}</span>
+                  <span className={styles.statusBadge}>online</span>
+                </div>
 
                 <h3 className={styles.blockTitle}>
                   {block.title}
@@ -89,7 +96,7 @@ export function Program() {
               {block.photo && (
                 <div className={styles.photoSlot} aria-hidden="true" />
               )}
-            </motion.div>
+            </motion.a>
           ))}
         </motion.div>
 

@@ -43,16 +43,24 @@
 
 // ── Карточка ──────────────────────────────────────────────
 .card {
+  position: relative;
   border-radius: $radius-lg;
   border: 1px solid $color-border;
   background: $color-card;
   overflow: hidden;
   display: flex;
   height: 100%;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
   transition: box-shadow 0.2s ease;
 
   &:hover {
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  &:focus-visible {
+    @include focus-ring;
   }
 }
 
@@ -65,6 +73,11 @@
   color: #ffffff;
 
   .blockNum    { color: rgba(255, 255, 255, 0.6); }
+  .statusBadge {
+    background: #ffffff;
+    color: #a32626;
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.16);
+  }
   .blockTitle  { color: #ffffff; }
   .blockDesc   { color: rgba(255, 255, 255, 0.82); }
   .lessonLabel { color: #ffffff; }
@@ -90,6 +103,13 @@
   min-width: 0;
 }
 
+.cardMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
 // ── Нумерация блока ───────────────────────────────────────
 .blockNum {
   font-size: 12px;
@@ -98,6 +118,23 @@
   text-transform: uppercase;
   color: $color-muted;
   line-height: 1;
+}
+
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  min-height: 26px;
+  padding: 5px 12px 4px;
+  border-radius: 999px;
+  background: $color-accent;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 // ── Заголовок блока ───────────────────────────────────────
