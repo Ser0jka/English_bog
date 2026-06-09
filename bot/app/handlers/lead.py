@@ -5,6 +5,7 @@ from aiogram.types import CallbackQuery, Message
 from app.config import Settings
 from app.keyboards.inline import back_to_menu_keyboard, choices_keyboard
 from app.services.admin_notify import notify_admins
+from app.services.reminder import cancel_reminder
 from app.states.lead_states import LeadStates
 from app.utils import texts
 
@@ -88,6 +89,10 @@ async def lead_comment(
         lead_data=data,
         title="Новый контакт после теста",
     )
+    # Анкета заполнена — отменяем напоминалку
+    if message.from_user:
+        cancel_reminder(message.from_user.id)
+
     source = data.get("source", "direct")
     await state.clear()
     await state.update_data(source=source)
