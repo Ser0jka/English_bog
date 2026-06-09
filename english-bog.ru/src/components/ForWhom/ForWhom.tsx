@@ -87,10 +87,10 @@ export function ForWhom() {
             variants={stagger}
           >
             <motion.div variants={fadeUp}>
-              <VideoSlot className={styles.videoItem} videoSrc="/videos/thokkathotakura-thot.gif" label="Видео 1" />
+              <VideoSlot className={styles.videoItem} videoSrc="/videos/thokkathotakura-thot.mp4" label="Видео 1" />
             </motion.div>
             <motion.div variants={fadeUp}>
-              <VideoSlot className={styles.videoItem} videoSrc="/videos/ouch-chilling.gif" label="Видео 2" />
+              <VideoSlot className={styles.videoItem} videoSrc="/videos/ouch-chilling.mp4" label="Видео 2" />
             </motion.div>
           </motion.div>
 

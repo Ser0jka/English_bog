@@ -106,7 +106,7 @@ export function Hero() {
             <motion.h1 className={styles.title} variants={titleStagger}>
               <motion.span className={styles.titleLine} variants={titleLine}>
                 {hero.titleStart}
-                <VideoSlot className={styles.videoInline} videoSrc="/videos/american-psycho-nodd.gif" label={hero.videoPlaceholder} />
+                <VideoSlot className={styles.videoInline} videoSrc="/videos/american-psycho-nodd.mp4" label={hero.videoPlaceholder} priority />
               </motion.span>
               <motion.span className={styles.nowrap} variants={titleLine}>{hero.titleMiddle}</motion.span>
               <motion.em variants={titleLine}>{hero.titleEnd}</motion.em>
