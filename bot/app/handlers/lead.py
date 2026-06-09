@@ -1,9 +1,10 @@
 from aiogram import Bot, F, Router
 from aiogram.fsm.context import FSMContext
-from aiogram.types import CallbackQuery, Message
+from aiogram.types import CallbackQuery, Message, User
 
 from app.config import Settings
 from app.keyboards.inline import back_to_menu_keyboard, choices_keyboard
+from app.services.analytics import track_user_event
 from app.services.admin_notify import notify_admins
 from app.states.lead_states import LeadStates
 from app.utils import texts
@@ -12,9 +13,11 @@ from app.utils import texts
 router = Router()
 
 
-async def start_lead_flow(message: Message, state: FSMContext) -> None:
+async def start_lead_flow(message: Message, state: FSMContext, user: User | None = None) -> None:
     data = await state.get_data()
-    await state.update_data(source=data.get("source", "direct"), lead_type="diagnostic")
+    source = data.get("source", "direct")
+    await state.update_data(source=source, lead_type="diagnostic")
+    track_user_event(user or message.from_user, "diagnostic_started", source=source)
     await state.set_state(LeadStates.name)
     await message.answer(texts.LEAD_INTRO, reply_markup=back_to_menu_keyboard())
 
@@ -22,7 +25,7 @@ async def start_lead_flow(message: Message, state: FSMContext) -> None:
 @router.callback_query(F.data == "lead")
 async def lead_from_menu(callback: CallbackQuery, state: FSMContext) -> None:
     if callback.message:
-        await start_lead_flow(callback.message, state)
+        await start_lead_flow(callback.message, state, callback.from_user)
     await callback.answer()
 
 
@@ -80,6 +83,7 @@ async def lead_comment(
 ) -> None:
     await state.update_data(comment=message.text)
     data = await state.get_data()
+    data = {**data, "status": "Завершено", "current_step": "Комментарий"}
 
     await notify_admins(
         bot=bot,
@@ -87,6 +91,12 @@ async def lead_comment(
         user=message.from_user,
         lead_data=data,
         title="Новый контакт после теста",
+    )
+    track_user_event(
+        message.from_user,
+        "diagnostic_completed",
+        source=data.get("source"),
+        form_data=data,
     )
     source = data.get("source", "direct")
     await state.clear()

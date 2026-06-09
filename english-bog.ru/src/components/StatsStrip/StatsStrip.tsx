@@ -6,10 +6,10 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import styles from "./StatsStrip.module.scss";
 
 const STATS = [
-  { value: 50, suffix: "+", label: "учеников занимаются" },
-  { value: 98, suffix: "%", label: "довольны результатом" },
-  { value: 7, suffix: "+", label: "лет преподавания" },
-  { value: 4, suffix: "", label: "направления занятий" },
+  { value: 20, suffix: "+", label: "учеников занимаются" },
+  { value: 100, suffix: "%", label: "успешно сдали экзамены" },
+  { value: 10, suffix: "+", label: "лет преподавания" },
+  { value: 6, suffix: "+", label: "беру на обучение школьников" },
 ];
 
 function StatCounter({

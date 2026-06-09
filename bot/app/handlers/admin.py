@@ -1,8 +1,10 @@
 from aiogram import Router
 from aiogram.filters import Command
+from aiogram.types import FSInputFile
 from aiogram.types import Message
 
 from app.config import Settings
+from app.services.analytics import ANALYTICS_PATH
 from app.utils import texts
 
 
@@ -17,4 +19,5 @@ async def admin_panel(message: Message, settings: Settings) -> None:
         return
 
     await message.answer(texts.ADMIN_STATUS)
-
+    if ANALYTICS_PATH.exists():
+        await message.answer_document(FSInputFile(ANALYTICS_PATH))

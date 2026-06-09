@@ -23,6 +23,8 @@ def build_admin_message(title: str, lead_data: dict, user: User | None) -> str:
             f"<b>{escape(title)}</b>",
             "",
             f"<b>Источник:</b> {_value(lead_data, 'source')}",
+            f"<b>Статус:</b> {_value(lead_data, 'status')}",
+            f"<b>Текущий шаг:</b> {_value(lead_data, 'current_step')}",
             f"<b>Имя:</b> {_value(lead_data, 'name')}",
             f"<b>Возраст / для кого английский:</b> {_value(lead_data, 'age_target')}",
             f"<b>Цель:</b> {_value(lead_data, 'goal')}",

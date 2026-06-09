@@ -4,6 +4,7 @@ from aiogram.types import CallbackQuery, Message
 
 from app.config import Settings
 from app.keyboards.inline import after_materials_keyboard, materials_gate_keyboard
+from app.services.analytics import track_user_event
 from app.services.channel_check import check_user_subscribed
 from app.utils import texts
 
@@ -46,6 +47,7 @@ async def materials_from_menu(
 @router.callback_query(F.data == "materials_subscribed")
 async def materials_after_subscribe(
     callback: CallbackQuery,
+    state: FSMContext,
     bot: Bot,
     settings: Settings,
 ) -> None:
@@ -67,5 +69,6 @@ async def materials_after_subscribe(
         return
 
     await give_materials(callback.message, settings)
+    data = await state.get_data()
+    track_user_event(callback.from_user, "materials_taken", source=data.get("source"))
     await callback.answer()
-

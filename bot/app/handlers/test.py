@@ -1,9 +1,10 @@
 from aiogram import Bot, F, Router
 from aiogram.fsm.context import FSMContext
-from aiogram.types import CallbackQuery, Message
+from aiogram.types import CallbackQuery, Message, User
 
 from app.config import Settings
 from app.keyboards.inline import back_to_menu_keyboard, choices_keyboard
+from app.services.analytics import track_user_event
 from app.services.admin_notify import notify_admins
 from app.states.test_states import TestStates
 from app.utils import texts
@@ -12,9 +13,11 @@ from app.utils import texts
 router = Router()
 
 
-async def start_test_flow(message: Message, state: FSMContext) -> None:
+async def start_test_flow(message: Message, state: FSMContext, user: User | None = None) -> None:
     data = await state.get_data()
-    await state.update_data(source=data.get("source", "test"), lead_type="mini-test")
+    source = data.get("source", "test")
+    await state.update_data(source=source, lead_type="mini-test")
+    track_user_event(user or message.from_user, "mini_test_started", source=source)
     await state.set_state(TestStates.name)
     await message.answer(texts.TEST_INTRO, reply_markup=back_to_menu_keyboard())
 
@@ -22,7 +25,7 @@ async def start_test_flow(message: Message, state: FSMContext) -> None:
 @router.callback_query(F.data == "test")
 async def test_from_menu(callback: CallbackQuery, state: FSMContext) -> None:
     if callback.message:
-        await start_test_flow(callback.message, state)
+        await start_test_flow(callback.message, state, callback.from_user)
     await callback.answer()
 
 
@@ -97,6 +100,7 @@ async def test_contact(
 ) -> None:
     await state.update_data(contact=message.text)
     data = await state.get_data()
+    data = {**data, "status": "Завершено", "current_step": "Контакт"}
 
     await notify_admins(
         bot=bot,
@@ -104,6 +108,12 @@ async def test_contact(
         user=message.from_user,
         lead_data=data,
         title="Новый контакт после мини-теста",
+    )
+    track_user_event(
+        message.from_user,
+        "mini_test_completed",
+        source=data.get("source"),
+        form_data=data,
     )
     source = data.get("source", "direct")
     await state.clear()
