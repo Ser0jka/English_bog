@@ -82,6 +82,14 @@ export function Footer() {
                   </a>
                 ))}
               </div>
+              <a
+                href="https://sl-digital.ru"
+                className={styles.credit}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Сделано sl-digital.ru
+              </a>
             </div>
 
             {/* Колонка 2: Меню */}
