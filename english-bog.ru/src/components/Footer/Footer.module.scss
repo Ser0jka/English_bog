@@ -130,6 +130,24 @@
   }
 }
 
+.credit {
+  width: fit-content;
+  color: $color-dark-muted;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  transition: color $transition;
+
+  &:hover {
+    color: $color-dark-text;
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+    outline-color: rgba(255, 255, 255, 0.5);
+  }
+}
+
 // ── Колонки 2-4 ───────────────────────────────────────────
 .col {
   display: flex;
